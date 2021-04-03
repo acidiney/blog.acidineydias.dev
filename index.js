@@ -7,7 +7,7 @@ module.exports = themeConfig => {
    * Default theme configuration
    */
   themeConfig = Object.assign(themeConfig, {
-    logo: '/assets/img/logo.png',
+    logo: '/assets/img/logo.jpeg',
     nav: themeConfig.nav || [
       {
         text: 'Blog',
@@ -23,7 +23,7 @@ module.exports = themeConfig => {
       typeof themeConfig.summaryLength === 'number'
         ? themeConfig.summaryLength
         : 200,
-    pwa: !!themeConfig.pwa,
+    pwa: !!themeConfig.pwa
   })
 
   /**

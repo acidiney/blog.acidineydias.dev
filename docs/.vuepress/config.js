@@ -1,24 +1,12 @@
 module.exports = {
-  title: 'Mediumish',
+  title: 'Acidiney Dias',
   base: '/',
   dest: 'public',
-  description: 'Mediumish theme with VuePress and Forestry',
-  logo: './assets/img/logo.png',
+  description: 'Meu blog pessoal, usando a forestry',
+  logo: './assets/img/logo.jpeg',
   theme: require.resolve('../../'),
   themeConfig: {
   authors: [
-      {
-      name: 'Sal',
-      avatar: '/assets/img/sal.jpg',
-      link: 'https://wowthemes.net/donate',
-      linktext: 'Follow',
-      },
-      {
-        name: 'John Doe',
-        avatar: '/assets/img/avatar.png',
-        link: 'https://bootstrapstarter.com/',
-        linktext: 'Follow',
-      },
     ],
     footer: {
       contact: [
@@ -32,7 +20,7 @@ module.exports = {
         },
         {
           type: 'github',
-          link: 'https://github.com/wowthemesnet/mediumish-vuepress-blog-theme',
+          link: 'https://github.com/acidiney/blog.acidineydias.me',
         },
         {
           type: 'gitlab',
@@ -60,7 +48,7 @@ module.exports = {
         },
         {
           type: 'twitter',
-          link: 'https://twitter.com/wowthemesnet',
+          link: 'https://twitter.com/acidineydias',
         },
         {
           type: 'web',
@@ -70,27 +58,27 @@ module.exports = {
       copyright: [
         {
           text: 'Licensed MIT.',
-          link: 'https://bootstrapstarter.com/license/',
+          link: '#',
         },
         {
           text: 'Made with Mediumish - free Vuepress theme',
-          link: 'https://bootstrapstarter.com/bootstrap-templates/vuepress-theme-mediumish/',
+          link: '#',
         },
       ],
     },
 
     sitemap: {
-      hostname: 'https://github.com/wowthemesnet/vuepress-theme-mediumish/'
+      hostname: 'https://github.com/acidineydias/blog.acidineydias.me/'
     },
     comment: {
       service: 'disqus',
-      shortname: 'demowebsite',
+      shortname: 'Acidiney Dias Blog',
     },
     newsletter: {
-      endpoint: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&id=8c3d2d214b'
+      endpoint: '#'
     },
     feed: {
-      canonical_base: 'https://github.com/wowthemesnet/vuepress-theme-mediumish/',
+      canonical_base: 'https://github.com/acidineydias/blog.acidineydias.me/',
     },
     smoothScroll: true
   },

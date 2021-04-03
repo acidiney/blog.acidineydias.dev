@@ -2,7 +2,7 @@
 <div class="row justify-content-center">
 
   <div class="blog-tags col-md-10 text-center mt-5">
-     <h1 class="font-secondary mb-5 font-weight-bold"> {{$site.description}}</h1>
+     <h1 class="font-secondary mb-5 font-weight-bold text-white"> {{$site.description}}</h1>
      <BlogTag v-for="tag in tags" :key="tag.name" :tag="tag" />
   </div>
   </div>

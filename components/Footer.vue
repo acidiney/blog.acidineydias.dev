@@ -4,7 +4,7 @@
 <div class="container">
 <div class="row justify-content-between">
 <div class="col">
-<a href="/"><img class="logofooter" :src="($withBase)($themeConfig.logo)"></a>
+<a href="/"><img class="logofooter rounded-circle" :src="($withBase)($themeConfig.logo)"></a>
 </div>
 <div class="col text-right">
 <ul v-if="contact" class="list-unstyled">

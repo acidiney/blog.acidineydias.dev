@@ -1,31 +1,43 @@
 <template>
-<section id="header-wrapper">
-<header id="header">
-<div class="header-wrapper">
-<nav class="navbar navbar-expand-md navbar-light bg-white fixed-top">
-<div class="container">
-<NavLink link="/" class="navbar-brand"><img :src="($withBase)($themeConfig.logo)"> {{ $site.title }} </NavLink>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-<ul v-if="$themeConfig.nav" class="navbar-nav ml-auto">
-<li
-v-for="item in $themeConfig.nav"
-:key="item.text"
-class="nav-item"
->
-<NavLink :link="item.link" class="nav-link">{{ item.text }}</NavLink>
-</li>
-<SearchBox />
-<Feed />
-</ul>
-</div>
-</div>
-</nav>
-</div>
-</header>
-</section>
+  <section id="header-wrapper">
+    <header id="header">
+      <div class="header-wrapper">
+        <nav class="navbar navbar-expand-md navbar-light bg-black text-white fixed-top">
+          <div class="container">
+            <NavLink link="/" class="navbar-brand text-white"
+              ><img class="rounded-circle" :src="$withBase($themeConfig.logo)" /> {{ $site.title }}
+            </NavLink>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+              <ul v-if="$themeConfig.nav" class="navbar-nav ml-auto">
+                <li
+                  v-for="item in $themeConfig.nav"
+                  :key="item.text"
+                  class="nav-item"
+                >
+                  <NavLink :link="item.link" class="nav-link text-white">{{
+                    item.text
+                  }}</NavLink>
+                </li>
+                <SearchBox />
+                <Feed />
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </section>
 </template>
 
 <script>
@@ -40,6 +52,9 @@ export default {
 <style lang="stylus">
 @import '~@app/style/config'
 // border-bottom 5px solid lighten(#3eaf7c, 50%)
+.bg-black
+  background #212121
+
 .header-wrapper
   .title
     /* flex 0 0 200px */

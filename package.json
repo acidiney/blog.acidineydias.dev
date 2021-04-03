@@ -15,7 +15,7 @@
     "url": "wowthemesnet/mediumish-vuepress-blog-theme"
   },
   "license": "MIT",
-  "author": "sal<wowthemesnet@gmail.com>",
+  "author": "Acidiney Dias<hello@acidineydias.me>",
   "main": "index.js",
   "files": [
     "index.js",
@@ -42,7 +42,6 @@
   },
   "lint-staged": {
     "*.{js,vue}": [
-      "eslint --fix",
       "git add"
     ],
     "package.json": [

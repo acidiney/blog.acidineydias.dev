@@ -1,7 +1,7 @@
 <template>
   <SimpleNewsletter v-slot="{ slotProps }">
     <div class="newsletter__wrap">
-      <div class="newsletter__title">{{ slotProps.title }}</div>
+      <div class="newsletter__title text-white">{{ slotProps.title }}</div>
       <div class="newsletter__content">{{ slotProps.content }}</div>
       <div class="newsletter__fields">
         <input
@@ -36,7 +36,7 @@ export default {
   .newsletter &__wrap
     max-width none
     padding: 1.8rem 2.3rem 3rem
-    background: #e5f5f0
+    background: #1111113d
 
   .newsletter &__fields
     display grid
@@ -48,6 +48,7 @@ export default {
 
   .newsletter &__content
     margin-top:0
+    color #cecece
 
   .newsletter &__button
     transition box-shadow 0.2s ease, transform 0.2s ease

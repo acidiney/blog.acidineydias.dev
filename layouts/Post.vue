@@ -12,10 +12,10 @@ itemtype="https://schema.org/BlogPosting"
   <header>
 
   <span class="text-muted"><PostMeta  :date="$frontmatter.date" /></span>
-  <h1 class="article-head mt-3" itemprop="name headline">
+  <h1 class="article-head mt-3 text-white" itemprop="name headline">
   {{ $frontmatter.title }}
   </h1>
-  <p class="lead">{{ $frontmatter.description }}</p>
+  <p class="lead text-white">{{ $frontmatter.description }}</p>
 
   <Avatar />
 
@@ -30,7 +30,7 @@ itemtype="https://schema.org/BlogPosting"
 </div>
 
 <div class="row justify-content-center">
-  <div class="col-md-8">
+  <div class="col-md-8 text-white">
   <Content  itemprop="articleBody" />
 
 

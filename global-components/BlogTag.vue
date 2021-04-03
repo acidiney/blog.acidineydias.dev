@@ -1,5 +1,5 @@
 <template>
-  <router-link class="blog-tag" :to="tag.path">
+  <router-link class="blog-tag text-white" :to="tag.path">
     {{ tag.name }} ({{ tag.pages.length }})
   </router-link>
 </template>
@@ -25,15 +25,11 @@ export default {
   text-align left
   box-sizing border-box
   transition background-color 0.3s
-  color $darkTextColor
-  border 1px solid $darkBorderColor
   text-decoration none
   transition all 0.5s
 
   &:hover
     color $accentColor !important
-    border 1px solid $accentColor
-    box-shadow 0 0 5px $accentColor
 
 @media screen and (max-width: 768px)
   .blog-tag
