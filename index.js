@@ -103,6 +103,12 @@ module.exports = themeConfig => {
     ],
     ['@vuepress/blog', blogPluginOptions],
     ['smooth-scroll', enableSmoothScroll],
+    [
+      "vuepress-plugin-google-adsense",
+      {
+        adClient: process.env.VUE_GOOGLE_ADSENSE,
+      },
+    ],
   ]
 
   /**

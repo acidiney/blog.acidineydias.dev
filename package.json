@@ -61,6 +61,7 @@
     "lodash": "^4.17.15",
     "remove-markdown": "^0.3.0",
     "vue-feather-icons": "^5.0.0",
+    "vuepress-plugin-google-adsense": "^0.2.1",
     "vuepress-plugin-smooth-scroll": "^0.0.9"
   },
   "devDependencies": {
