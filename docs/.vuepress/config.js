@@ -56,7 +56,7 @@ module.exports = {
     },
     comment: {
       service: 'disqus',
-      shortname: 'Acidiney Dias Blog',
+      shortname: 'acidineydias',
     },
     newsletter: {
       endpoint: '#',
