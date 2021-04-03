@@ -11,13 +11,6 @@ sections:
   match: "*.md"
   templates:
   - post
-- type: directory
-  path: docs
-  label: Pages
-  create: documents
-  match: "*.md"
-  templates:
-  - page
 upload_dir: docs/.vuepress/public/assets/img
 public_path: "/assets/img"
 front_matter_path: ''

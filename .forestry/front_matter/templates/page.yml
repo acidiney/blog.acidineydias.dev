@@ -12,5 +12,3 @@ fields:
   config:
     required: false
   label: description
-pages:
-- docs/about.md
