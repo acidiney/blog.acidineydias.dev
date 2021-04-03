@@ -24,4 +24,5 @@ fields:
   name: summary
   label: summary
 pages:
+- docs/_posts/lookup-nao-exite-mais.md
 - docs/_posts/refazendo-meu-portfolio-parte-1.md
