@@ -1,92 +1,17 @@
 {
     "version": "https://jsonfeed.org/version/1",
-    "title": "Mediumish",
-    "home_page_url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/",
-    "feed_url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/feed.json",
-    "description": "Mediumish theme with VuePress and Forestry",
+    "title": "Acidiney Dias",
+    "home_page_url": "https://github.com/acidineydias/blog.acidineydias.me/",
+    "feed_url": "https://github.com/acidineydias/blog.acidineydias.me/feed.json",
+    "description": "Meu blog pessoal, usando a forestry",
     "items": [
         {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2018/11/07/frontmatter-in-vuepress-3/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2018/11/07/frontmatter-in-vuepress-3/",
-            "title": "VuePress also supports Json",
-            "date_modified": "2018-11-06T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2018/11/07/frontmatter-in-vuepress/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2018/11/07/frontmatter-in-vuepress/",
-            "title": "Magical nature, God is perfect",
-            "summary": "I have travelled for so long that I can't even remember my own city.",
-            "date_modified": "2018-11-06T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/02/26/markdown-slot-3/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/02/26/markdown-slot-3/",
-            "title": "World Health Organization officials criticized for slow response",
-            "summary": "The number of confirmed COVID-19 cases jumped.",
-            "date_modified": "2019-02-25T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/02/26/markdown-slot-2/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/02/26/markdown-slot-2/",
-            "title": "Migrants clash with Greek police at border after Turkey opens floodgates",
-            "summary": "Greek police fired tear gas to repel hundreds of migrants.",
-            "date_modified": "2019-02-25T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/02/26/markdown-slot-4/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/02/26/markdown-slot-4/",
-            "title": "Markdown Slot 4",
-            "summary": "Implementing markdown files, provders of metadata.",
-            "date_modified": "2019-02-25T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/02/26/markdown-slot/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/02/26/markdown-slot/",
-            "title": "Why do I need Markdown Slot",
-            "summary": "VuePress implements a content distribution API for Markdown.",
-            "date_modified": "2019-02-25T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/05/06/writing-a-vuepress-theme-2/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/05/06/writing-a-vuepress-theme-2/",
-            "title": "Wonderful diversity of plants and animals",
-            "summary": "The geographical distribution of the land within the tropics.",
-            "date_modified": "2019-05-05T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/05/06/writing-a-vuepress-theme/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/05/06/writing-a-vuepress-theme/",
-            "title": "Writing a vuepress theme",
-            "summary": "Mediumish is the best VuePress theme Medium styled.",
-            "date_modified": "2019-05-05T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/05/06/writing-a-vuepress-theme-4/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2019/05/06/writing-a-vuepress-theme-4/",
-            "title": "Leaving Las Vegas",
-            "summary": "We find that Nature has made many wonderful provisions.",
-            "date_modified": "2019-05-05T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2020/01/01/writing-a-vuepress-theme-3/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2020/01/01/writing-a-vuepress-theme-3/",
-            "title": "Welcome to Mediumish",
-            "summary": "Journalism is the production and distribution of reports on events.",
-            "date_modified": "2019-12-31T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2020/01/28/whats-the-most-beautiful-website-world/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2020/01/28/whats-the-most-beautiful-website-world/",
-            "title": "What's the most beautiful website in the world",
-            "summary": "Any website that uses a static generator.",
-            "date_modified": "2020-01-27T23:00:00.000Z"
-        },
-        {
-            "id": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2020/01/29/hello-world/",
-            "url": "https://github.com/wowthemesnet/vuepress-theme-mediumish/2020/01/29/hello-world/",
-            "title": "Hello, World",
-            "summary": "For a moment she wondered how she had happened to wake so early.",
-            "date_modified": "2020-01-28T23:00:00.000Z"
+            "id": "https://github.com/acidineydias/blog.acidineydias.me/2020/05/15/refazendo-meu-portfolio-parte-1/",
+            "url": "https://github.com/acidineydias/blog.acidineydias.me/2020/05/15/refazendo-meu-portfolio-parte-1/",
+            "title": "Refazendo meu portfolio parte 1",
+            "summary": "Passo a passo de como foi refazer o portfolio",
+            "image": "https://camo.githubusercontent.com/ef0ca85770f6d8f2bcf8a97f70de7cef889fa8182022c2b01e5d5e1d31ff7788/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313539333837343733392f41636964696e6579446961732e6d652f323032302d31362d30352d72656275696c642d706f7274666f6c696f2f323032302d30352d31362d72656275696c642d6d65752d706f7274666f6c696f5f6d32356471772e706e67",
+            "date_modified": "2020-05-15T23:00:00.000Z"
         }
     ]
 }
