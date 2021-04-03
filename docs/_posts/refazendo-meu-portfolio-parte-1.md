@@ -3,7 +3,7 @@ tags: []
 title: Refazendo meu portfolio parte 1
 date: 2020-05-15 23:00:00 +0000
 author: Acidiney Dias
-featuredimg: ''
+featuredimg: "/assets/img/2020-16-05-rebuild-portfolio_qlmp8j.jpeg"
 summary: Passo a passo de como foi refazer o portfolio
 
 ---
