@@ -59,7 +59,7 @@ module.exports = {
       shortname: 'acidineydias',
     },
     newsletter: {
-      endpoint: '#',
+      endpoint: process.env.VUE_MAIL_CHIMP_POST,
     },
     feed: {
       canonical_base: 'https://github.com/acidineydias/blog.acidineydias.me/',
