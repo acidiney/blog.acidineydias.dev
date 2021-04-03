@@ -1,5 +1,12 @@
 ---
-tags: []
+tags:
+- Javascript
+- Nuxtjs
+- PWA
+- SSG
+- Markdown
+- JAMStack
+- Front-matter
 title: Refazendo meu portfolio parte 1
 date: 2020-05-15 23:00:00 +0000
 author: Acidiney Dias
@@ -57,7 +64,7 @@ Algo curioso é que durante o processo todo o meu `mode` do nuxt estava como `un
 
 ## Lendo conteúdo de todos markdowns de uma vez
 
-Algo que estava a me incomodar era não ter uma descrição na lista de post's na home page, eu até consegia por intermedio de uma gambiarra pegar a `data` o `titulo `e as `categorias `( Aqui no teu ouvido... era uma GAMBIARRA daquelas 😂😂😂😂). Como era: basicamente o nome dos meus markdowns consistem na `data` e o `title` como o desse por exemplo: `2020-05-16-refazendo-meu-portfolio`, assim com algumas regras e com alguns `slices` daqui e dali eu consigo ter a data e o titulo. Então para adicionar as categorias teria que fazer algo do género `2020-05-16-refazendo-meu-portfolio.javascript,nuxt,pwa,ssg` e depois um `split` daqui e uns `slices` dali e pronto eu tinha as categorias 😂✌ (Avisei). O problema logo surge quando queremos exibir alguma descrição básica, eu fiz tudo isso para não ter que abrir os markdowns na primeira página. depois de alguns esforços fracassados decidi seguir abrindo-os mesmo. Porém só dos que estiverem a ser vistos no momento, fiz isso usando o interception api do HTML, para facilitar usei essa lib [Vue Observe Visibility](https://github.com/Akryum/vue-observe-visibility) e depois de algumas pesquisas descobri que poderia passar atributos nos markdowns usando o próprio front-matter, ficando desta forma em todos os markdowns.
+Algo que estava a me incomodar era não ter uma descrição na lista de post's na home page, eu até consegia por intermedio de uma gambiarra pegar a `data` o `titulo`e as `categorias`( Aqui no teu ouvido... era uma GAMBIARRA daquelas 😂😂😂😂). Como era: basicamente o nome dos meus markdowns consistem na `data` e o `title` como o desse por exemplo: `2020-05-16-refazendo-meu-portfolio`, assim com algumas regras e com alguns `slices` daqui e dali eu consigo ter a data e o titulo. Então para adicionar as categorias teria que fazer algo do género `2020-05-16-refazendo-meu-portfolio.javascript,nuxt,pwa,ssg` e depois um `split` daqui e uns `slices` dali e pronto eu tinha as categorias 😂✌ (Avisei). O problema logo surge quando queremos exibir alguma descrição básica, eu fiz tudo isso para não ter que abrir os markdowns na primeira página. depois de alguns esforços fracassados decidi seguir abrindo-os mesmo. Porém só dos que estiverem a ser vistos no momento, fiz isso usando o interception api do HTML, para facilitar usei essa lib [Vue Observe Visibility](https://github.com/Akryum/vue-observe-visibility) e depois de algumas pesquisas descobri que poderia passar atributos nos markdowns usando o próprio front-matter, ficando desta forma em todos os markdowns.
 
     ---
     date: 2020-05-16
@@ -84,7 +91,7 @@ Isso me abriu as portas para customizar uma capa nos posts como no caso desse aq
         }
      })
 
-E _voila_ eu tenho as minhas `description` só para os posts que estiverem visíveis. 
+E _voila_ eu tenho as minhas `description` só para os posts que estiverem visíveis.
 
 [![Post With Description](https://camo.githubusercontent.com/ef0ca85770f6d8f2bcf8a97f70de7cef889fa8182022c2b01e5d5e1d31ff7788/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313539333837343733392f41636964696e6579446961732e6d652f323032302d31362d30352d72656275696c642d706f7274666f6c696f2f323032302d30352d31362d72656275696c642d6d65752d706f7274666f6c696f5f6d32356471772e706e67)](https://camo.githubusercontent.com/ef0ca85770f6d8f2bcf8a97f70de7cef889fa8182022c2b01e5d5e1d31ff7788/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313539333837343733392f41636964696e6579446961732e6d652f323032302d31362d30352d72656275696c642d706f7274666f6c696f2f323032302d30352d31362d72656275696c642d6d65752d706f7274666f6c696f5f6d32356471772e706e67)
 
