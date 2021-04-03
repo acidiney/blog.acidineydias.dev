@@ -23,5 +23,3 @@ fields:
 - type: text
   name: summary
   label: summary
-pages:
-- docs/_posts/2019-2-26-markdown-slot-3.md
