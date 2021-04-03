@@ -7,9 +7,9 @@ tags:
 - Break-changes
 - Nestjs
 title: Lookup não exite mais!
-date: 2020-05-17 23:00:00 +0000
+date: 2020-05-17T23:00:00.000+00:00
 author: Acidiney Dias
-featuredimg: ''
+featuredimg: "/assets/img/screenshot-2021-04-03-at-23-22-18.png"
 summary: Break-changes no projecto lookup-ao
 
 ---
