@@ -2,21 +2,22 @@
   <div id="mobile-header">
     <div class="mobile-header-bar">
       <div class="mobile-header-title">
-        <NavLink link="/" class="mobile-home-link navbar-brand"><img :src="($withBase)($themeConfig.logo)"> {{ $site.title }} </NavLink>
+        <NavLink link="/" class=" text-white mobile-home-link navbar-brand"><img class="mr-2 rounded-circle" :src="($withBase)($themeConfig.logo)"> {{ $site.title }} </NavLink>
         <component
+          class="text-white"
           :is="isOpen ? 'XIcon' : 'MenuIcon'"
           @click="$emit('toggle-sidebar')"
         />
       </div>
       <div class="mobile-menu-wrapper" :class="{ open: isOpen }">
         <hr class="menu-divider" />
-        <ul v-if="$themeConfig.nav" class="mobile-nav">
+        <ul v-if="$themeConfig.nav" class="mobile-nav text-white">
           <li
             v-for="item in $themeConfig.nav"
             :key="item.text"
-            class="mobile-nav-item"
+            class="mobile-nav-item "
           >
-            <NavLink :link="item.link">{{ item.text }}</NavLink>
+            <NavLink class="text-white" :link="item.link">{{ item.text }}</NavLink>
           </li>
           <li class="mobile-nav-item">
             <Feed />
