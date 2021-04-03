@@ -6,7 +6,7 @@ tags:
 title: Um pouco sobre offline first e granularidade!
 date: 2020-09-26T23:00:00.000+00:00
 author: Acidiney Dias
-featuredimg: "/assets/img/mike-szczepanski-mnsyyyqunxa-unsplash_jbel6h_1_ywpk3a.jpeg"
+featuredimg: "/assets/img/dados.png"
 summary: "Hoje escrevo sobre um assunto que fiz uma POC, para perceber como poderia
   funcionar toda essa maracutaia que é offline first ( Esse assunto é absurdamente
   grande, o que vou trazer hoje é apenas um pedaço desse tópico ). Caso tenha interesse
