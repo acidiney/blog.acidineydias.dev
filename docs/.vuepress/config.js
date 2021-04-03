@@ -2,84 +2,68 @@ module.exports = {
   title: 'Acidiney Dias',
   base: '/',
   dest: 'public',
+  head: [
+    ['link', { rel: "apple-touch-icon", sizes: "180x180", href: "./assets/favicons/apple-touch-icon.png"}],
+    ['link', { rel: "icon", type: "image/png", sizes: "32x32", href: "./assets/favicons/favicon-32x32.png"}],
+    ['link', { rel: "icon", type: "image/png", sizes: "16x16", href: "./assets/favicons/favicon-16x16.png"}],
+    ['link', { rel: "manifest", href: "./assets/favicons/site.webmanifest"}],
+    ['link', { rel: "shortcut icon", href: "./assets/favicons/favicon.ico"}],
+    ['meta', { name: "msapplication-TileColor", content: "#212121"}],
+    ['meta', { name: "theme-color", content: "#ffffff"}],
+  ],
   description: 'Meu blog pessoal, usando a forestry',
   logo: './assets/img/logo.jpeg',
   theme: require.resolve('../../'),
   themeConfig: {
-  authors: [
-    ],
+    authors: ['Acidiney Dias'],
     footer: {
       contact: [
         {
-          type: 'codepen',
-          link: '#',
-        },
-        {
-          type: 'facebook',
-          link: '#',
-        },
-        {
           type: 'github',
-          link: 'https://github.com/acidiney/blog.acidineydias.me',
-        },
-        {
-          type: 'gitlab',
-          link: '#',
+          link: 'https://github.com/acidiney',
         },
         {
           type: 'instagram',
-          link: '#',
+          link: 'https://www.instagram.com/acidineydias/',
         },
         {
           type: 'linkedin',
-          link: '#',
+          link: 'https://linkedin.com/in/acidineydias',
         },
         {
           type: 'mail',
-          link: '#',
-        },
-        {
-          type: 'messenger',
-          link: '#',
-        },
-        {
-          type: 'phone',
-          link: '#',
+          link: 'mailto:hello@acidineydias.me',
         },
         {
           type: 'twitter',
           link: 'https://twitter.com/acidineydias',
         },
-        {
-          type: 'web',
-          link: '#',
-        }
       ],
       copyright: [
         {
           text: 'Licensed MIT.',
-          link: '#',
+          link: 'https://github.com/acidiney/blog.acidineydias.me',
         },
         {
-          text: 'Made with Mediumish - free Vuepress theme',
-          link: '#',
+          text: 'Made using Mediumish',
+          link: 'https://github.com/acidiney/blog.acidineydias.me',
         },
       ],
     },
 
     sitemap: {
-      hostname: 'https://github.com/acidineydias/blog.acidineydias.me/'
+      hostname: 'https://github.com/acidineydias/blog.acidineydias.me/',
     },
     comment: {
       service: 'disqus',
       shortname: 'Acidiney Dias Blog',
     },
     newsletter: {
-      endpoint: '#'
+      endpoint: '#',
     },
     feed: {
       canonical_base: 'https://github.com/acidineydias/blog.acidineydias.me/',
     },
-    smoothScroll: true
+    smoothScroll: true,
   },
 }
