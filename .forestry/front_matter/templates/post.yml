@@ -23,3 +23,5 @@ fields:
 - type: text
   name: summary
   label: summary
+pages:
+- docs/_posts/refazendo-meu-portfolio-parte-1.md
