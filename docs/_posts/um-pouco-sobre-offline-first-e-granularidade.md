@@ -85,7 +85,7 @@ _(🥱 Estou orgulhoso dessa definição OMG 😱😱😱😱😱)_
 ### Onde eu usei
 
 Eu usei como switch entre chamar os métodos que fazem a comunicação com o server e os métodos que fazem a comunicação com a DB Local.
-
+```js
     // network.mjs
     
     import online from './online/index.mjs'
@@ -108,6 +108,7 @@ Eu usei como switch entre chamar os métodos que fazem a comunicação com o ser
     let api = new Proxy(target, handler);
     
     export default api
+```
 
 Basicamente se eu chamar o método `getTodos()` de `api` ele vai verificar se estou conectado ou não ( a internet )... e se vai executar o método com esse nome que está dentro dos métodos que disponibilizei no módulo online... com os `fetch` e todas as maracutaias, do contrário vai procurar e executar o método a partir da API de métodos offlines que eu disponibilizei e faz um select na DB do indexedDB.
 
@@ -124,7 +125,7 @@ Uma vez que vocês já sabem qual é o segredo da minha PoC que foi o uso da `pr
 Basicamente quando eu estou conectado a Internet eu atualizo a minha BD local com as novas informações sempre:
 
 _\[ Algo fixe que você pode fazer aqui é rodar uma lógica de updates recorrentes para garantir que a máquina do cliente esteja sempre atualizada \]_
-
+```js
     // online.mjs
     import { API_URL } from '../../../constants.mjs'
     import { insertData } from '../../database/index.mjs'
@@ -145,13 +146,13 @@ _\[ Algo fixe que você pode fazer aqui é rodar uma lógica de updates recorren
       },
       // ...
     }
-
+```
 Já já explico o `diff`, por enquanto esqueça.
 
 ![](/assets/img/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313630313539333438302f41636964696e6579446961732e6d652f323032302d31302d32372d637269616e646f2d756d612d706f632d64652d6772616e756c617269646164.png)
 
 Quando offline...
-
+```js
     // offline.mjs
     import { select } from '../../database/index.mjs'
     
@@ -165,7 +166,8 @@ Quando offline...
       },
       // ...
     }
-    
+ ```
+ ```js
     // database.mjs
     
     /**
@@ -183,7 +185,8 @@ Quando offline...
         })
       return todos
     }
-    
+ ```
+ ```html
     /**
      * Returns an array of todos from local database
      *
@@ -204,7 +207,7 @@ Quando offline...
     
       onMount(getTodos);
     </script>
-
+```
 ![](/assets/img/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313630313539333438302f41636964696e6579446961732e6d652f323032302d31302d32372d637269616e646f2d756d612d706f632d64652d6772616e756c61726964-3.png)
 
 Eu tinha de início usado aquele helper que o svelte tem para as chamadas, no template `#await`, mas depois de um tempo parou de me resolver... talvez tem alguma forma de continuar usando ele ... mas no meu contexto e para as minhas skills com ele não achei então foi pelo caminho os hooks mesmo, que é o normal e tal.O problema que ele não estava a resolver é quando eu precisava de sincronizar e atualizar a lista....
@@ -214,7 +217,7 @@ _\[ O problema que ele não estava a resolver é quando eu precisava de sincroni
 ## Modificando os dados
 
 Bem, uma vez que eu já tenho os dados listados de boa e já tenho a minha BD atualizada chegou a hora de modificar esses dados... Até aqui tranquilo... foi um método no online, outro no offline e o um update no meu `database.mjs`.
-
+```js
     //online.mjs
     // ... imports
     import { updateTodoLocal } from '../../database/index.mjs'
@@ -238,7 +241,8 @@ Bem, uma vez que eu já tenho os dados listados de boa e já tenho a minha BD at
           .then(updateTodoLocal)
       }
     }
-
+```
+```js
 Quando offline...
 
     // offline.mjs
@@ -260,9 +264,10 @@ Quando offline...
         event.emit('reload') // este event usei o mitt para propagar o evento para atualizar a lista de todos
       }
     }
+```
 
 o `event.emit` é o vem do [mitt](https://github.com/developit/mitt) ele é um event emitter bem similar ao `vue.$emit` super recomendo.. eu usei ele para mandar a instrução para atualizar toda a lista no frontend quando a alteração for feita, isso porque ao contrário do server que me retornava o novo estado da da linha e eu fazia o update na base de dados local, ao usar a db local que é síncrona ele atualiza o banco porém a interface ficam os os dados anterior, o que faz com que se você tentar alterar o estado ele continua atualizando para os dados anteriores, o que é chato.
-
+```js
     // database.mjs
     
     /**
@@ -279,9 +284,9 @@ o `event.emit` é o vem do [mitt](https://github.com/developit/mitt) ele é um e
         db.todos.where('id').equals(todo.id).modify({ done: todo.done, diff: todo.diff ? 1 : 0 });
       });
     }
-
+```
 Por algum motivo muito estranho no dexie quando fazes queries e aplicas um boolean no where ele dá erro por isso tive que transformar em `0 e 1` o diff.
-
+```html
     <!-- app.svelte -->
     <script>
       import network from "../assets/js/resources/network/index.mjs";
@@ -315,7 +320,7 @@ Por algum motivo muito estranho no dexie quando fazes queries e aplicas um boole
         {/each}
       </table>
     </main>
-
+```
 A API (interface de uso) do Svelte bebe muito da do Vuejs e do React então foi bem de boa ver as coisas e aplicar.
 
 ## Criar um novo todo
@@ -325,7 +330,7 @@ O dilema aqui era saber como eu sei que esse dado é novo? Tipo, o diff me ajuda
 _Lembrando que essas analogias, é para o cenário que o usuário fez algumas ações offline e precisou sincronizar depois... _
 
 Resolvi isso adicionando mais uma chave(key) no indexedDB chamado **created**, que só existe quando o usuário for criado.
-
+```js
     /// online.mjs
     
     // ... imports
@@ -349,7 +354,8 @@ Resolvi isso adicionando mais uma chave(key) no indexedDB chamado **created**, q
         })
       }
     }
-
+```
+```js
 Quando offline ...
 
     /// offline.mjs
@@ -367,13 +373,13 @@ Quando offline ...
         }))
       }
     }
-
+```
 ![](/assets/img/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313630313539333438302f41636964696e6579446961732e6d652f323032302d31302d32372d637269616e646f2d756d612d706f632d64652d6772616e756c61726964-4.png)
 
 _Aqui eu passei o `diff` com o valor de `1`, mas poderia ser `true`, porque já tinha tratado lá dentro... viajei ... E quanto a interface estar desatualizada em relação a base de dados local o `mitt` resolveu o assunto._
 
 Não colocarei o código da database por já ter mandado uma vez... só re-utilizei aqui 😉.
-
+```html
     <!-- app.svelte -->
     <script>
       import network from "../assets/js/resources/network/index.mjs";
@@ -395,7 +401,7 @@ Não colocarei o código da database por já ter mandado uma vez... só re-utili
         <button on:click={onClick}>Criar todo</button>
       </div>
     </main>
-
+```
 Pensei em validar mais depois fiquei com preguiça kkkk, desculpa.
 
 \[ Joãozinho \]: Preguiçoso 😑!
@@ -405,7 +411,7 @@ Pensei em validar mais depois fiquei com preguiça kkkk, desculpa.
 Bem, aqui temos uma armadilha... ou talvez não... não sei kkkk são 4h, e ainda não dormi.
 
 O fluxo de eliminar é bem normal quando você está online, porém quando você está offline é que tem que se tomar cuidado porque você não apaga os dados (**NEVER DELETE**), porque quando for sincronizar o servidor precisa de saber que aquele dado foi apagado, para ele seguir caminho.
-
+```js
     // online.mjs
     
     import { removeTodo } from '../../database/index.mjs'
@@ -429,9 +435,9 @@ O fluxo de eliminar é bem normal quando você está online, porém quando você
           })
       },
     }
-
+```
 Quando offline ...
-
+```js
     // offline.mjs
     import { updateTodoLocal } from '../../database/index.mjs'
     
@@ -448,11 +454,11 @@ Quando offline ...
         event.emit('reload')
       },
     }
-
+```
 Eu resolvi o problema simplesmente adicionando uma propriedade `removed` que é o boolean também.
 
 _Tanto no contexto do created quanto no do removed, precisam de uma atenção especial a nível de backend para saber como processar essas informações._
-
+```js
     // database.mjs
     
     /**
@@ -463,9 +469,9 @@ _Tanto no contexto do created quanto no do removed, precisam de uma atenção es
     export const removeTodo = (id) => {
       db.todos.where('id').equals(id).delete()
     }
-
+```
 E na view fiz um simples if para só listar o que não foi removido.
-
+```html
     <!-- app.svelte -->
     {#if !todo.removed}
       <tr>
@@ -482,7 +488,7 @@ E na view fiz um simples if para só listar o que não foi removido.
         </td>
       </tr>
     {/if}
-
+```
 ![](/assets/img/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313630313539333438322f41636964696e6579446961732e6d652f323032302d31302d32372d637269616e646f2d756d612d706f632d64652d6772616e756c61726964-2.png)
 
 Com isso fechei os métodos básicos...
@@ -492,16 +498,16 @@ O ponto foi agora adicionar o mecanismo que sincroniza automaticamente quando o 
 ## Sync
 
 Bem, para isso um event listener chamado online, ele observa a mudança de estado da rede do computador do cliente, e ele só é chamado quando o cliente, volta a estar conectado a internet.
-
+```js
     // network.mjs
     window.addEventListener('online', function () {
       api.sync()
     })
-
+```
 Basicamente quando ele está online ele pede para sincronizar chamando o método `sync` que só existe no `online.mjs`, até poderia padronizar e adicionar ele ao `offline.mjs` também, mas sinceramente, não acredito que para uma PoC seja algo realmente divisor de águas.
 
 Então, basicamente é esta função faz isso aqui:
-
+```js
     // online.mjs
     import { deleteAll } from '../../database/index.mjs'
     
@@ -535,9 +541,9 @@ Então, basicamente é esta função faz isso aqui:
           })
       }
     }
-
+```
 E é aqui onde tudo se encaixa, as propriedades `diff`, `removed` e `created`, que até então existiam sem nenhum propósito. Basicamente eu envio todas as linhas que foram modificadas para o servidor, essas linhas podem ser updates, deletes ou create, eu sei isso no frontend pelo diff.
-
+```js
     // database.mjs
     
     // Retorna todos os todos com o diff a true ou 1 em outras palavras ^^
@@ -568,7 +574,7 @@ e no servidor eu tenho o meu método que recebe e trata cada caso específico de
       });
       return res.json(todos)
     })
-
+```
 ![](/assets/img/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313630313539333438322f41636964696e6579446961732e6d652f323032302d31302d32372d637269616e646f2d756d612d706f632d64652d6772616e756c61726964-1.png)
 
 **_![](/assets/img/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f64736673666364796f2f696d6167652f75706c6f61642f76313630313539333438322f41636964696e6579446961732e6d652f323032302d31302d32372d637269616e646f2d756d612d706f632d64652d6772616e756c617269646164.png)_**
