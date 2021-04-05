@@ -186,14 +186,15 @@ Quando offline...
       return todos
     }
  ```
- ```html
+ ```js
     /**
      * Returns an array of todos from local database
      *
      * @return { object[] }
      */
     export const select = () => db.todos.toArray()
-    
+    ```
+    ```js
     <!-- app.svelte -->
     <script>
       import network from "../assets/js/resources/network/index.mjs";
