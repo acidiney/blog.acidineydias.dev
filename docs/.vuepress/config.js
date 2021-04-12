@@ -49,7 +49,7 @@ module.exports = {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config',${process.env.VUE_GOOGLE_ANALYTICS});
+        gtag('config',"${process.env.VUE_GOOGLE_ANALYTICS}");
       `,
     ],
   ],
