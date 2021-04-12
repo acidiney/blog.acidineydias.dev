@@ -109,12 +109,6 @@ module.exports = themeConfig => {
         adClient: process.env.VUE_GOOGLE_ADSENSE,
         adsTxt: true,
       },
-    ],
-    [
-      '@vuepress/google-analytics',
-      {
-        'ga': process.env.VUE_GOOGLE_ANALYTICS
-      }
     ]
   ]
 
