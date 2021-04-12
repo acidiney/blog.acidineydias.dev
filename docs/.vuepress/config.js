@@ -108,4 +108,5 @@ module.exports = {
     },
     smoothScroll: true,
   },
+  pwa: true
 }
