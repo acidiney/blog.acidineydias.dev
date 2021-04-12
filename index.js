@@ -107,6 +107,7 @@ module.exports = themeConfig => {
       "vuepress-plugin-google-adsense",
       {
         adClient: process.env.VUE_GOOGLE_ADSENSE,
+        adsTxt: true,
       },
     ],
     [
