@@ -75,7 +75,7 @@ O que poderia salvar o sistema?
 
 Joãozinho: 😱 Então estamos à beira de um colapso?
 
-R: Conservadoramente, sim… se nada mudar, a sustentabilidade do sistema estará em risco. Mas ainda há tempo para agir e fortalecer o INSS.
+R: Obviamente, estamos a falar de um futuro que somente acontecerá caso o êxodo continue e os investimentos à semelhança da Movicel também continuem. Se nada mudar nestes dois aspetos fundamentais, a sustentabilidade do sistema estará em risco. Mas ainda há tempo para agir e fortalecer o INSS.
 
 ## Conclusão
 
