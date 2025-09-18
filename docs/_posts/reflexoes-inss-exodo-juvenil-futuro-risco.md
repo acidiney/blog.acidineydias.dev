@@ -8,6 +8,7 @@ tags:
 title: Reflexões sobre o INSS, jovens a sair, futuro em risco
 date: 2025-09-18T23:00:00.000+00:00
 author: Acidiney Dias
+featuredimg: "/assets/img/2025-09-19-rreflexoes-inss-exodo-juvenil-futuro-risco.jpeg"
 summary: "Nos últimos anos, Angola tem assistido a uma saída crescente de jovens em idade ativa. O INSS enfrenta desafios de arrecadação e investimentos pouco rentáveis. Um artigo para refletirmos sobre um assunto pouco discutido."
 ---
 
