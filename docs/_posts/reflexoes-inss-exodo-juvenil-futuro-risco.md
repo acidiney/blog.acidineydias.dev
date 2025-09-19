@@ -58,7 +58,7 @@ Joãozinho: 😅 Isto tudo me lembra a minha mãe… eu ouvia de um lado e saía
 Além da Movicel, o INSS chegou a realizar investimentos em infraestrutura para modernizar serviços públicos ([MAPTSS, 2022](https://www.maptss.gov.ao/2022/06/21/inss-faz-investimentos-para-garantir-sustentabilidade-na-proteccao-social-obrigatoria/))... Que até o presente momento tem se mostrado positivo,
 segundo o INSS, em 2024 houve uma arrecadação de mais de **1 bilião de kwanzas**, representando um **crescimento de 26% em relação a 2023**. [Notícias ao Minuto, 2025](https://www.noticiasaominuto.com/mundo/2816228/ss-angolana-mais-que-triplicou-em-2024-arrecadacao-de-contribuicoes)
 
-Joãozinho Joãozinho: 🤨 Então estamos a perder dinheiro com Movicel, e ainda há menos contribuintes…
+Joãozinho: 🤨 Então estamos a perder dinheiro com Movicel, e ainda há menos contribuintes…
 
 R: Pois é, Joãozinho… e como disse Rui Falcão, **“não somos quadros, somos só a moldura”**. E é exatamente isso que se vê quando olhamos para o êxodo juvenil e o impacto no INSS: muitos deixam o país, e o que fica são estruturas.
 
