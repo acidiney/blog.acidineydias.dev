@@ -43,7 +43,7 @@ itemtype="https://schema.org/BlogPosting"
 </article>
 
 <div class="row justify-content-center">
-  <div class="col-md-9">
+  <div class="col-md-9 mt-4">
     <Newsletter v-if="$service.email.enabled" />
     <Comment />
   </div>
