@@ -91,7 +91,7 @@ O êxodo juvenil e os investimentos pouco rentáveis do INSS não são apenas n�
 
 **Fontes:**
 
-- [Proteções Sociais](https://www.inss.gov.ao/prestacoes-sociais
+- [Proteções Sociais](https://www.inss.gov.ao/prestacoes-sociais)
 
 - [MAPTSS, 2022](https://www.maptss.gov.ao/2022/06/21/inss-faz-investimentos-para-garantir-sustentabilidade-na-proteccao-social-obrigatoria/)
 
