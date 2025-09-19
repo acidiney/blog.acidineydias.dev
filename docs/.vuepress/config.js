@@ -53,7 +53,7 @@ module.exports = {
       `,
     ],
   ],
-  description: 'Meu blog pessoal, usando a forestry',
+  description: 'Aqui compartilho minhas ideia, pensamentos e pesquisas',
   logo: './assets/img/logo.jpeg',
   theme: require.resolve('../../'),
   themeConfig: {
@@ -74,7 +74,7 @@ module.exports = {
         },
         {
           type: 'mail',
-          link: 'mailto:hello@acidineydias.me',
+          link: 'mailto:hireme@acidineydias.dev',
         },
         {
           type: 'twitter',
@@ -84,17 +84,17 @@ module.exports = {
       copyright: [
         {
           text: 'Licensed MIT.',
-          link: 'https://github.com/acidiney/blog.acidineydias.me',
+          link: 'https://github.com/acidiney/blog.acidineydias.dev',
         },
         {
           text: 'Made using Mediumish',
-          link: 'https://github.com/acidiney/blog.acidineydias.me',
+          link: 'https://github.com/acidiney/blog.acidineydias.dev',
         },
       ],
     },
 
     sitemap: {
-      hostname: 'https://github.com/acidineydias/blog.acidineydias.me/',
+      hostname: 'https://github.com/acidineydias/blog.acidineydias.dev/',
     },
     comment: {
       service: 'disqus',
@@ -104,7 +104,7 @@ module.exports = {
       endpoint: process.env.VUE_MAIL_CHIMP_POST,
     },
     feed: {
-      canonical_base: 'https://github.com/acidineydias/blog.acidineydias.me/',
+      canonical_base: 'https://github.com/acidineydias/blog.acidineydias.dev/',
     },
     smoothScroll: true,
   },
