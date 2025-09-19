@@ -21,7 +21,7 @@ Este artigo é fruto de algumas reflexões que fiz recentemente e gostaria de co
 
 ## O que é o INSS
 
-O Instituto Nacional de Segurança Social (INSS) é o principal órgão responsável pela gestão da proteção social em Angola. O seu papel é garantir que trabalhadores ativos contribuam financeiramente para que, em caso de aposentadoria, invalidez, maternidade ou outros eventos sociais, tenham direito a benefícios. [Proteções Sociais](https://www.inss.gov.ao/prestacoes-sociais)
+O Instituto Nacional de Segurança Social (INSS) é o principal órgão responsável pela gestão da proteção social em Angola. O seu papel é garantir que trabalhadores ativos contribuam financeiramente para que, em caso de aposentadoria, invalidez, maternidade ou outros eventos sociais, tenham direito a benefícios. ([Proteções Sociais](https://www.inss.gov.ao/prestacoes-sociais))
 
 O funcionamento do INSS baseia-se no princípio da **solidariedade intergeracional**: os trabalhadores em atividade financiam os benefícios dos aposentados e dependentes, criando um sistema de redistribuição de recursos. As contribuições provêm do setor privado e público, e a sustentabilidade do sistema depende diretamente do número de contribuintes ativos, da regularidade das contribuições e da gestão eficiente dos recursos e investimentos do instituto ([MAPTSS, 2022](https://www.maptss.gov.ao/2022/06/21/inss-faz-investimentos-para-garantir-sustentabilidade-na-proteccao-social-obrigatoria/)).
 
