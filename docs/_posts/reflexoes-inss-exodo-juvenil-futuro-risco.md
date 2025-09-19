@@ -43,7 +43,12 @@ Um estudo de 2021 mostra que, embora a principal motivação dos emigrantes seja
 
 Em 2023, o número de inscritos no INSS alcançou 2.694.367 cidadãos, representando um crescimento de 8,9% em relação a 2022 ([Governo de Angola, 2023](https://governo.gov.ao/noticias/1128/governo/de-2022-a-2023/inss-regista-crescimento-de-89-por-cento-de-contribuintes)). Apesar desse aumento, a dívida em contribuições em atraso ultrapassa 280 mil milhões de kwanzas. Além disso, embora o setor privado represente 79% das contribuições, 31,4% dos funcionários públicos não estão inscritos no sistema ([Economia em Mercado, 2023](https://www.economiaemercado.com/artigo/sector-privado-sustenta-seguranca-social-em-angola))
 
+**Nota do autor:**
+> Infelizmente, não existem dados públicos sobre o número exato de contribuintes ativos do INSS. Embora o registo de cerca de 2 milhões de cidadãos seja expressivo, é importante sublinhar que isso não significa que todos estejam efetivamente a contribuir. Dentro desse universo, existem pessoas que já não residem em Angola, trabalhadores que perderam o emprego (ficando temporariamente fora do sistema), bem como beneficiários em situação de invalidez que continuam a constar nas estatísticas. A ausência de dados detalhados limita uma análise mais rigorosa. Seria fundamental que estes números fossem publicados, para permitir um debate mais claro e transparente sobre a real sustentabilidade do sistema.
+
 Esta informação é particularmente interessante de analisar, pois o maior empregador em Angola é historicamente o Estado. Isso se torna ainda mais relevante após os 500 mil empregos gerados, que resultaram na nacionalização de algumas grandes empresas privadas, como a Unitel ([Dos 500 mil empregos prometidos, governo já criou 470 mil, afirma João Lourenço](https://www.istoenoticia.info/dos-500-mil-empregos-prometidos-governo-ja-criou-470-mil-afirma-joao-lourenco/)).
+
+Outro ponto é que segundo dados recolhidos pelo Jornal Expansão, das cerca de 18 milhões de pessoas em idade ativa (~15 anos ou mais) em 2024, pouco mais de 2,5 milhões têm emprego formal. Isso representa apenas 14% da população em idade ativa a contribuir de forma regular para o sistema. Ou seja, a grande maioria dos cidadãos trabalha no setor informal ou está desempregada, o que limita severamente a base contributiva do INSS. ([Expansão, 2025](https://expansao.co.ao/angola/detalhe/apenas-14-em-cada-100-pessoas-em-idade-activa-tem-emprego-formal-64973.html))
 
 Joãozinho: 😬 Então estão a receber dinheiro de um lado e não de outro… complicado
 
@@ -101,6 +106,8 @@ O êxodo juvenil e os investimentos pouco rentáveis do INSS não são apenas n�
 - [Economia em Mercado, 2023](https://www.economiaemercado.com/artigo/sector-privado-sustenta-seguranca-social-em-angola)
 
 - [Istoenoticia.info](https://www.istoenoticia.info/dos-500-mil-empregos-prometidos-governo-ja-criou-470-mil-afirma-joao-lourenco/)
+
+- [Expansão, 2025](https://expansao.co.ao/angola/detalhe/apenas-14-em-cada-100-pessoas-em-idade-activa-tem-emprego-formal-64973.html)
 
 - [Expansão, 2022](https://expansao.co.ao/empresas/detalhe/movicel-formaliza-aumento-de-capital-e-inss-torna-se-socio-maioritario-com-51-do-capital-60744.html)
 
