@@ -30,7 +30,7 @@ Joãozinho: 🧐 Mas Acidiney, isso não é tipo uma pirâmide?
 R: 😏 Bom, para nós os **leigos**, se parece uma pirâmide, cheira a pirâmide... Então é uma pirâmide.
 Porém, segundo os estudiosos a diferença aqui é que é um **"sistema solidário intergeracional"**. _Se as contribuições diminuem ou os investimentos não rendem, o sistema entra em apuros… e é disso que vamos falar_.
 
-## Emigração: uma bomba silenciosa
+## Êxodo: uma bomba silenciosa
 
 Nos últimos anos, Angola tem assistido a um aumento significativo da saída de jovens do país. Entre 2017 e 2023, a comunidade angolana em Portugal triplicou, passando de cerca de 16.854 para 55.589 residentes ([Afrobarometer, 2024](https://www.afrobarometer.org/publication/ad955-os-angolanos-tem-opinioes-divergentes-sobre-a-migracao-mas-a-maioria-ja-pensou-em-sair-do-pais/)). A grande maioria são jovens urbanos, muitos com formação superior porém considerados molduras([Pordata, 2024](https://www.pordata.pt/sites/default/files/2024-07/f_2023_12_12_pr_dia_internacional_dos_migrantes_vf.pdf)).
 
