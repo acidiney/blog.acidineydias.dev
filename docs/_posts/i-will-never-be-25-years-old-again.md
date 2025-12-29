@@ -9,7 +9,7 @@ title: I Will Never Be 25 Years Old Again
 date: 2025-12-28 23:00:00 +0000
 author: Acidiney Dias
 summary: In this article, I reflect on my journey from 2019 until the end of 2025, when I realized I would never be 25 years old again. I share how I began to understand the true meaning of financial freedom, the mistakes I made with my money, the goals I set, and the challenges I faced. I reflect on the importance of acting today, valuing time, and taking responsibility for my choices while seeking to balance ambition, financial security, and personal well-being.
-featuredimg: "/assets/img/nunca-mais-terei-25-anos-de-idade.png"
+featuredimg: "/assets/img/i-will-never-be-25-years-old-again.png"
 ---
 
 > Você pode encontrar a versão original em Português [aqui](https://blog.acidineydias.dev/2025/12/28/nunca-mais-terei-25-anos-de-idade/).
