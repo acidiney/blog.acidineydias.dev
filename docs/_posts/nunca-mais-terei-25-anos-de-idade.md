@@ -6,7 +6,7 @@ tags:
   - Introspecção
 
 title: Nunca mais terei 25 anos de idade
-date: 2025-12-28 23:00:00 +0000
+date: 2025-12-28T22:00:00.000+00:00
 author: Acidiney Dias
 summary: Neste artigo, faço uma reflexão sobre a minha trajetória desde 2019 até ao fim de 2025, quando percebi que nunca mais terei 25 anos. Partilho como comecei a compreender o verdadeiro significado da liberdade financeira, os erros que cometi com o meu dinheiro, as metas que estabeleci e os desafios que enfrentei. Reflito sobre a importância de agir hoje, valorizar o tempo e assumir responsabilidade pelas minhas escolhas, enquanto busco equilibrar ambição, segurança financeira e bem-estar pessoal.
 featuredimg: "/assets/img/nunca-mais-terei-25-anos-de-idade.png"
