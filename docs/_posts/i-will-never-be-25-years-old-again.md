@@ -1,15 +1,8 @@
 ---
 tags: 
-    - PersonalReflection
-    - FinancialFreedom
     - PersonalGrowth
-    - FinancialLearning
     - LifePlanning
-    - GoalsAndObjectives
     - Investments
-    - YouthAndResponsibilities
-    - SelfDevelopment
-    - TimeManagement
     - Introspection
 
 title: I Will Never Be 25 Years Old Again

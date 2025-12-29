@@ -1,15 +1,8 @@
 ---
 tags:
-  - Reflexãopessoal
-  - Liberdadefinanceira
   - Crescimentopessoal
-  - Aprendizadofinanceiro
   - Planeamentodevida
-  - Metaseobjetivos
   - Investimentos
-  - juventuderesponsabilidades
-  - Autodesenvolvimento
-  - Gestãodotempo
   - Introspecção
 
 title: Nunca mais terei 25 anos de idade
