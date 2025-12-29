@@ -12,7 +12,7 @@ summary: In this article, I reflect on my journey from 2019 until the end of 202
 featuredimg: "/assets/img/nunca-mais-terei-25-anos-de-idade.png"
 ---
 
-> Você pode encontrar a versão original em Português [aqui](https://blog.acidineydias.dev/2025/12/28/i-will-never-be-25-years-old-again/).
+> Você pode encontrar a versão original em Português [aqui](https://blog.acidineydias.dev/2025/12/28/nunca-mais-terei-25-anos-de-idade/).
 
 The year was 2019. After a long day of work, my colleague and I were talking on our way home. At that time, our journey took around 1h30min on days when, of course, traffic was good. Which, by the way, was not the case that day.
 

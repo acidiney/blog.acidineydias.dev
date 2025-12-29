@@ -12,7 +12,7 @@ summary: Neste artigo, faço uma reflexão sobre a minha trajetória desde 2019 
 featuredimg: "/assets/img/nunca-mais-terei-25-anos-de-idade.png"
 ---
 
-> You can find the english version [here](https://blog.acidineydias.dev/2025/12/28/nunca-mais-terei-25-anos-de-idade/).
+> You can find the english version [here](https://blog.acidineydias.dev/2025/12/28/i-will-never-be-25-years-old-again/).
 
 O ano era 2019. Depois de um longo dia de trabalho, eu e o meu colega conversávamos a caminho de casa. Naquela altura, o nosso trajeto demorava algo em torno de 1h30min nos dias em que, claro, o trânsito estava bom. O que, por acaso, não foi aquele dia.
 
