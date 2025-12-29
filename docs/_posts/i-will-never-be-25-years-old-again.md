@@ -1,16 +1,17 @@
 ---
 tags: 
-- PersonalReflection
-- FinancialFreedom
-- PersonalGrowth
-- FinancialLearning
-- LifePlanning
-- GoalsAndObjectives
-- Investments
-- YouthAndResponsibilities
-- SelfDevelopment
-- TimeManagement
-- Introspection
+    - PersonalReflection
+    - FinancialFreedom
+    - PersonalGrowth
+    - FinancialLearning
+    - LifePlanning
+    - GoalsAndObjectives
+    - Investments
+    - YouthAndResponsibilities
+    - SelfDevelopment
+    - TimeManagement
+    - Introspection
+
 title: I Will Never Be 25 Years Old Again
 date: 2025-12-28 23:00:00 +0000
 author: Acidiney Dias
