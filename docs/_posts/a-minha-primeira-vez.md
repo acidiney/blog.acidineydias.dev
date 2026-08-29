@@ -168,9 +168,9 @@ Mas nem sempre foi assim.
 
 Muita gente que começou a investir há alguns anos passou por algum tipo de dificuldade parecida. Talvez não exactamente a mesma que eu, mas a falta de informação prática, a dificuldade de acesso, a dependência dos bancos e a distância entre aquilo que estava escrito nos livros e aquilo que acontecia na vida real eram problemas bastante comuns.
 
-E é justamente aqui que esta história começa a cruzar-se com a Tauview.
+E é justamente aqui que esta história começa a cruzar-se com a [tauview](https://tauview.app).
 
-A Tauview nunca foi pensada para ser um projecto por si só.
+A [Tauview](https://tauview.app) nunca foi pensada para ser um projecto por si só.
 
 Era apenas um módulo que eu precisava para outro projecto que estava a desenvolver na altura.
 
@@ -178,7 +178,7 @@ Depois de fazer o módulo, mostrei a algumas pessoas.
 
 O feedback foi tão positivo que decidi lançá-lo separadamente enquanto continuava a trabalhar no projecto original.
 
-Só que, à medida que a Tauview foi crescendo, comecei a perceber a complexidade do problema que estava a tentar resolver.
+Só que, à medida que a [Tauview](https://tauview.app) foi crescendo, comecei a perceber a complexidade do problema que estava a tentar resolver.
 
 E acabei por parar o desenvolvimento do outro projecto para me focar nela.
 
@@ -212,7 +212,7 @@ E, para mim, essa diferença parece pequena, mas muda completamente a forma como
 
 No fundo, talvez seja isso que mais me marcou nesta experiência.
 
-Eu não comecei a construir a Tauview porque um dia acordei e pensei: “vou criar uma plataforma para o mercado de capitais angolano”.
+Eu não comecei a construir a [Tauview](https://tauview.app) porque um dia acordei e pensei: “vou criar uma plataforma para o mercado de capitais angolano”.
 
 Comecei porque, anos antes, eu era precisamente a pessoa que precisava dela.
 
