@@ -1,21 +1,16 @@
-
-
-
-
-⸻
-
+---
 tags:
-
-* Investments
-* CapitalMarkets
-* Angola
-* Tauview
-
-title: A Minha Primeira Vez no Mercado de Capitais Angolano
-date: 2025-12-28T22:00:00.000+00:00
+  - MercadoDeCapitais
+  - Investimentos
+  - Angola
+  - EducacaoFinanceira
+  - Tauview
+title: A minha primeira vez
+date: 2026-08-29T13:00:00.000+00:00
 author: Acidiney Dias
-summary: Neste artigo, conto como comecei a explorar o mercado de capitais angolano, desde as primeiras dificuldades para abrir uma conta custódia e compreender as cotações de títulos até à experiência prática que, anos mais tarde, ajudaria a dar forma à Tauview. Uma reflexão sobre acesso à informação, Obrigações do Tesouro, mercado secundário e a importância de tornar a complexidade dos investimentos mais compreensível.
-featuredimg: “/assets/img/a-minha-primeira-vez-no-mercado-de-capitais-angolano.png”
+summary: A minha experiência como investidor no mercado de capitais angolano, desde as primeiras tentativas de comprar títulos até à criação da Tauview para tornar cotações, portfólios e o valor real dos investimentos mais fáceis de compreender.
+featuredimg: "/assets/img/a-minha-primeira-vez.png"
+---
 
 A minha primeira vez
 
@@ -217,9 +212,7 @@ E, para mim, essa diferença parece pequena, mas muda completamente a forma como
 
 No fundo, talvez seja isso que mais me marcou nesta experiência.
 
-Eu não comecei a construir a Tauview porque um dia acordei e pensei:
-
-“vou criar uma plataforma para o mercado de capitais angolano”.
+Eu não comecei a construir a Tauview porque um dia acordei e pensei: “vou criar uma plataforma para o mercado de capitais angolano”.
 
 Comecei porque, anos antes, eu era precisamente a pessoa que precisava dela.
 
@@ -242,3 +235,5 @@ Mas tornar essa complexidade compreensível.
 Porque investir já é suficientemente difícil.
 
 Entender quanto vale aquilo que já comprámos não devia ser.
+
+Thank you.
