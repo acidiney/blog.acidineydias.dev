@@ -9,7 +9,7 @@ title: A minha primeira vez
 date: 2026-08-29T13:00:00.000+00:00
 author: Acidiney Dias
 summary: A minha experiência como investidor no mercado de capitais angolano, desde as primeiras tentativas de comprar títulos até à criação da Tauview para tornar cotações, portfólios e o valor real dos investimentos mais fáceis de compreender.
-featuredimg: "/assets/img/a-minha-primeira-vez.png"
+featuredimg: "/assets/img/a-minha-primeira-vez-no-mercado-de-capitais-angolano.png"
 ---
 
 A minha primeira vez
