@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, poemPath, sortByDate } from '../../lib/content';
+const poems = sortByDate(await getCollection('poems'));
+---
+<BaseLayout title="Poemas" description="O espaço de poesia de Acidiney Dias — uma coleção em preparação." canonical="/poems/">
+  <section class="poems shell" data-testid="poems-index" data-pagefind-ignore>
+    <p class="eyebrow">Poemas</p>
+    <h1 class="display">Há páginas que começam em silêncio.</h1>
+    {poems.length === 0 ? (
+      <div class="empty"><span aria-hidden="true">∴</span><p>Este espaço ainda não tem poemas publicados.</p><small>Quando houver palavras para este ritmo, elas viverão aqui — sem anúncios, comentários ou interrupções.</small><a href="/blog/">Enquanto isso, leia os artigos →</a></div>
+    ) : <ol>{poems.map((poem) => <li><time datetime={poem.data.date.toISOString()}>{formatDate(poem.data.date)}</time><a href={poemPath(poem)}>{poem.data.title}</a></li>)}</ol>}
+  </section>
+</BaseLayout>
+<style>
+.poems { width: min(860px, calc(100% - 2rem)); padding-top: clamp(5rem, 14vw, 11rem); min-height: 70vh; }
+.poems h1 { font-size: clamp(4rem, 11vw, 9rem); margin: .8rem 0 5rem; }
+.empty { max-width: 600px; margin-left: auto; border-top: 1px solid #69635a; padding-top: 1.5rem; }
+.empty > span { color: #f0b44d; font: 400 3rem var(--font-display); }
+.empty p { font: 400 1.6rem var(--font-display); margin: .4rem 0; }
+.empty small { display: block; color: #aaa49b; font-size: 1rem; line-height: 1.55; }
+.empty a { display: inline-block; margin-top: 2rem; color: #ffd178; font-weight: 800; }
+.poems ol { list-style: none; padding: 0; }.poems li { display: grid; grid-template-columns: 150px 1fr; border-top: 1px solid #59544c; padding: 1rem 0; }.poems li a { font: 700 2rem var(--font-display); }
+</style>
