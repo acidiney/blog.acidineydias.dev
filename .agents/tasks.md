@@ -9,17 +9,17 @@ scope: locked
 # Shared context
 
 - Article summary text uses the `.dek` class in `BlogPostLayout.astro`.
-- The approved scale is `clamp(1.25rem, 2vw, 1.55rem)`.
-- Width, color, margins, line height, title, metadata, byline, spacing, and layout remain unchanged.
+- The approved summary width is the existing 960px article content width.
+- Font size, color, margins, line height, title, metadata, byline, spacing, and layout remain unchanged.
 
-## Task 1: Increase the article summary text
+## Task 1: Widen the article summary text block
 
 **Depends on:** None
 
-**Outcome:** Article summaries have more visual presence beneath their titles at every viewport width.
+**Outcome:** Article summaries use the full reading column beneath their titles on desktop.
 
-**Why:** The current summary text appears too small relative to the title and available reading width.
+**Why:** The previous 740px limit leaves available space unused and wraps long summaries too early.
 
-**Acceptance:** The computed `.dek` font size reaches 24.8px on a wide viewport and never drops below 20px on narrow screens.
+**Acceptance:** The computed `.dek` width reaches at least 940px on the desktop test viewport while its font size remains 21.12px.
 
 **Autonomy:** AFK

@@ -97,6 +97,10 @@ test('desktop article Markdown uses the wider editorial column', async ({ page }
   await expect(tocBrand.locator('img')).toHaveAttribute('src', '/assets/img/acidiney-brand.jpg');
   const width = await page.locator('.prose').evaluate((element) => element.getBoundingClientRect().width);
   expect(width).toBeGreaterThanOrEqual(940);
+  const summary = page.locator('.dek');
+  const summaryWidth = await summary.evaluate((element) => element.getBoundingClientRect().width);
+  expect(summaryWidth).toBeGreaterThanOrEqual(940);
+  await expect(summary).toHaveCSS('font-size', '21.12px');
   await expect(page.locator('.prose > p').first()).toHaveCSS('font-family', /Inter/);
   await expect(page.locator('.prose > p').first()).toHaveCSS('margin-top', '0px');
   const title = page.locator('.article__header h1');
