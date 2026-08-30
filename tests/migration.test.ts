@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { blogImage, sortByDate } from '../src/lib/content';
+import { blogImage, readingTimeMinutes, sortByDate } from '../src/lib/content';
 import { blogSchema, poemSchema } from '../src/lib/schemas';
 
 const root = process.cwd();
@@ -35,10 +35,10 @@ describe('content migration', () => {
     expect(readFileSync(join(blogDir, withIdentifiers[0]), 'utf8')).toContain('legacyIdentifier: v-1f7a93f4');
   });
 
-  it('keeps poems empty and locks both requested tokens', () => {
+  it('keeps poems empty and locks the light background with dark primary', () => {
     expect(readdirSync(join(root, 'src/content/poems')).filter((name) => /\.mdx?$/.test(name))).toHaveLength(0);
     const css = readFileSync(join(root, 'src/styles/global.css'), 'utf8');
-    expect(css).toContain('--color-background: #212121');
+    expect(css).toContain('--color-background: #f4f2ec');
     expect(css).toContain('--color-primary: #212121');
   });
 
@@ -68,5 +68,11 @@ describe('content migration', () => {
   it('defaults content to Portuguese and marks the English article explicitly', () => {
     expect(poemSchema.parse({ title: 'Poema', date: '2026-08-29', summary: 'Resumo' }).language).toBe('pt');
     expect(readFileSync(join(blogDir, 'i-will-never-be-25-years-old-again.md'), 'utf8')).toContain('language: en');
+  });
+
+  it('estimates reading time with a one-minute minimum and rounds up', () => {
+    expect(readingTimeMinutes('')).toBe(1);
+    expect(readingTimeMinutes('palavra '.repeat(220))).toBe(1);
+    expect(readingTimeMinutes('palavra '.repeat(221))).toBe(2);
   });
 });

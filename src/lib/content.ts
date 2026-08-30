@@ -9,6 +9,17 @@ export function blogPath(post: CollectionEntry<'blog'>): string { return `/blog/
 export function poemPath(poem: CollectionEntry<'poems'>): string { return `/poems/${poem.id}/`; }
 export function tagSegment(tag: string): string { return tag.includes('/') ? tag.toLowerCase().replaceAll('/', '-') : tag; }
 export function tagPath(tag: string): string { return `/blog/tags/${encodeURIComponent(tagSegment(tag))}/`; }
+export function readingTimeMinutes(markdown: string): number {
+  const readableText = markdown
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`([^`]*)`/g, '$1')
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[#>*_~|-]/g, ' ');
+  const words = readableText.match(/[\p{L}\p{N}]+(?:['’–-][\p{L}\p{N}]+)*/gu)?.length ?? 0;
+  return Math.max(1, Math.ceil(words / 220));
+}
 export const blogImageDimensions: Record<string, readonly [number, number]> = {
   'a-minha-primeira-vez': [1200, 675],
   'i-will-never-be-25-years-old-again': [1200, 800],
