@@ -90,6 +90,13 @@ test('article language follows validated content metadata', async ({ page }) => 
   await expect(page.locator('html')).toHaveAttribute('lang', 'pt');
 });
 
+test('article byline includes localized reading time', async ({ page }) => {
+  await page.goto('/blog/a-minha-primeira-vez/');
+  await expect(page.locator('.byline')).toHaveText(/^Por Acidiney Dias · \d+ min de leitura$/);
+  await page.goto('/blog/i-will-never-be-25-years-old-again/');
+  await expect(page.locator('.byline')).toHaveText(/^By Acidiney Dias · \d+ min read$/);
+});
+
 test('desktop article Markdown uses the wider editorial column', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile-chromium');
   await page.goto('/blog/a-minha-primeira-vez/');

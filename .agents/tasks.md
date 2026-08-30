@@ -1,6 +1,6 @@
 ---
 skill: task-breakdown
-version: 4
+version: 5
 date: 2026-08-30
 status: complete
 scope: locked
@@ -8,18 +8,32 @@ scope: locked
 
 # Shared context
 
-- Article summary text uses the `.dek` class in `BlogPostLayout.astro`.
-- The approved summary width is the existing 960px article content width.
-- Font size, color, margins, line height, title, metadata, byline, spacing, and layout remain unchanged.
+- Reading time is calculated at build time from each Markdown body.
+- The approved speed is 220 words per minute, rounded up with a one-minute minimum.
+- The estimate appears beside the existing author byline.
+- Portuguese and English articles use localized labels.
+- No runtime dependency is allowed.
 
-## Task 1: Widen the article summary text block
+## Task 1: Calculate reading time
 
 **Depends on:** None
 
-**Outcome:** Article summaries use the full reading column beneath their titles on desktop.
+**Outcome:** The content layer exposes a stable reading-time estimate for any Markdown body.
 
-**Why:** The previous 740px limit leaves available space unused and wraps long summaries too early.
+**Why:** A shared build-time calculation keeps estimates consistent across all articles.
 
-**Acceptance:** The computed `.dek` width reaches at least 940px on the desktop test viewport while its font size remains 21.12px.
+**Acceptance:** One unit test verifies the one-minute minimum and rounds 221 readable words to two minutes.
+
+**Autonomy:** AFK
+
+## Task 2: Show the localized estimate
+
+**Depends on:** Task 1
+
+**Outcome:** Every article byline includes its reading-time estimate in the article language.
+
+**Why:** Readers can judge the commitment before starting the article without adding another metadata row.
+
+**Acceptance:** One browser test finds `min de leitura` on a Portuguese article and `min read` on an English article beside the author.
 
 **Autonomy:** AFK

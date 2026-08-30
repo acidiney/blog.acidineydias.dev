@@ -5,12 +5,16 @@ import BlogToc from '../components/BlogToc.astro';
 import Newsletter from '../components/Newsletter.astro';
 import AdSlot from '../components/AdSlot.astro';
 import DisqusThread from '../components/DisqusThread.astro';
-import { blogImage, blogPath, formatDate, tagPath } from '../lib/content';
+import { blogImage, blogPath, formatDate, readingTimeMinutes, tagPath } from '../lib/content';
 import type { MarkdownHeading } from 'astro';
 
 interface Props { post: CollectionEntry<'blog'>; headings: MarkdownHeading[]; }
 const { post, headings } = Astro.props;
 const image = blogImage(post.id, post.data.featuredimg, post.data.featuredimgWidth, post.data.featuredimgHeight);
+const readingMinutes = readingTimeMinutes(post.body ?? '');
+const byline = post.data.language === 'en'
+  ? `By ${post.data.author} · ${readingMinutes} min read`
+  : `Por ${post.data.author} · ${readingMinutes} min de leitura`;
 ---
 <BaseLayout title={post.data.title} description={post.data.summary} canonical={blogPath(post)} image={post.data.featuredimg} type="article" language={post.data.language} preloadImage={image}>
   <article class="article shell" data-testid="blog-post" data-pagefind-body>
@@ -19,7 +23,7 @@ const image = blogImage(post.id, post.data.featuredimg, post.data.featuredimgWid
         <p class="eyebrow">{post.data.tags[0] ?? 'Artigo'} · <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time></p>
         <h1 class="display" data-pagefind-meta="title">{post.data.title}</h1>
         <p class="dek">{post.data.summary}</p>
-        <p class="byline">Por {post.data.author}</p>
+        <p class="byline">{byline}</p>
       </div>
     </header>
     <figure class="hero-image"><img src={image.src} srcset={image.srcset} sizes="(max-width: 1272px) calc(100vw - 2rem), 1240px" width={image.width} height={image.height} alt="" fetchpriority="high" /></figure>
