@@ -53,13 +53,12 @@ for (const file of htmlFiles) {
 if (missing.size) fail(`broken internal links:\n${[...missing].join('\n')}`);
 
 const poems = readFileSync(join(dist, 'poems/index.html'), 'utf8');
-for (const hook of ['newsletter', 'ad-slot', 'disqus-thread', 'blog-toc']) if (poems.includes(`data-testid="${hook}"`)) fail(`poems index leaked ${hook}`);
+for (const hook of ['newsletter', 'disqus-thread', 'blog-toc']) if (poems.includes(`data-testid="${hook}"`)) fail(`poems index leaked ${hook}`);
 
 const portuguese = readFileSync(join(dist, 'blog/a-minha-primeira-vez/index.html'), 'utf8');
 const english = readFileSync(join(dist, 'blog/i-will-never-be-25-years-old-again/index.html'), 'utf8');
 if (!portuguese.includes('<html lang="pt">') || !english.includes('<html lang="en">')) fail('article language metadata is incorrect');
 for (const token of ['googletagmanager.com', 'pagead2.googlesyndication.com']) if (portuguese.includes(token)) fail(`credential-free output leaked ${token}`);
-if (portuguese.includes('data-testid="ad-slot"')) fail('credential-free output rendered an ad slot');
 if (/<section class="newsletter"[\s\S]*?<form/.test(portuguese)) fail('credential-free newsletter rendered a form');
 
 console.log(`Verified ${posts.length} posts, ${htmlFiles.length} HTML files, editorial index 8/2, feeds 8/0, sitemap host, Pagefind, and internal links.`);

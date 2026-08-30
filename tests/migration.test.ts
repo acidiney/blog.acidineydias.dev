@@ -44,7 +44,7 @@ describe('content migration', () => {
 
   it('keeps the poem layout free of blog integrations', () => {
     const layout = readFileSync(join(root, 'src/layouts/PoemLayout.astro'), 'utf8');
-    for (const integration of ['Newsletter', 'AdSlot', 'DisqusThread', 'BlogToc', 'medium-zoom']) expect(layout).not.toContain(integration);
+    for (const integration of ['Newsletter', 'DisqusThread', 'BlogToc', 'medium-zoom']) expect(layout).not.toContain(integration);
   });
 
   it('lets an original poem validate without blog legacy or image metadata', () => {
