@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Página não encontrada" description="A página pedida não existe." canonical="/404/" noindex>
-  <section class="not-found shell"><p class="eyebrow">Erro 404</p><h1 class="display">Esta página saiu da margem.</h1><p>O endereço pode ter mudado, ou talvez nunca tenha existido.</p><div><a href="/blog/">Explorar artigos</a><a href="/">Voltar ao início</a></div></section>
+<BaseLayout title="Página não encontrada" description="Esta página não existe." canonical="/404/" noindex>
+  <section class="not-found shell"><p class="eyebrow">Erro 404</p><h1 class="display">Esta página não está aqui.</h1><p>O endereço pode estar errado ou a página deixou de existir.</p><div><a href="/blog/">Ver os artigos</a><a href="/">Voltar ao início</a></div></section>
 </BaseLayout>
-<style>.not-found { padding-top: clamp(6rem, 15vw, 12rem); min-height: 65vh; }.not-found h1 { font-size: clamp(4rem, 12vw, 10rem); max-width: 1000px; margin: .7rem 0 2rem; }.not-found > p:not(.eyebrow) { color: #bdb7ac; font-size: 1.3rem; }.not-found div { display: flex; gap: 1rem; margin-top: 2rem; }.not-found a { border: 1px solid #69635b; border-radius: 999px; padding: .65rem 1rem; text-decoration: none; }.not-found a:first-child { background: #f0b44d; color: #212121; border-color: #f0b44d; font-weight: 800; }</style>
+<style>.not-found { padding-top: clamp(6rem, 15vw, 12rem); min-height: 65vh; }.not-found h1 { font-size: clamp(4rem, 12vw, 10rem); max-width: 1000px; margin: .7rem 0 2rem; }.not-found > p:not(.eyebrow) { color: var(--muted); font-size: 1.3rem; }.not-found div { display: flex; gap: 1rem; margin-top: 2rem; }.not-found a { border-bottom: 1px solid var(--rule); padding: .4rem 0; text-decoration: none; }.not-found a:first-child { color: var(--ink); font-weight: 750; }</style>

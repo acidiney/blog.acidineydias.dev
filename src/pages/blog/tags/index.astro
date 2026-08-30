@@ -5,14 +5,14 @@ import { tagPath } from '../../../lib/content';
 const posts = await getCollection('blog');
 const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) => a.localeCompare(b));
 ---
-<BaseLayout title="Tags" description="Assuntos recorrentes nos artigos de Acidiney Dias." canonical="/blog/tags/">
-  <section class="tags-page shell"><p class="eyebrow">Índice</p><h1 class="display">Assuntos que regressam.</h1><div class="tag-cloud">{tags.map((tag) => <a href={tagPath(tag)}><span>#{tag}</span><small>{posts.filter((post) => post.data.tags.includes(tag)).length}</small></a>)}</div></section>
+<BaseLayout title="Assuntos" description="Assuntos dos artigos de Acidiney Dias." canonical="/blog/tags/">
+  <section class="tags-page shell"><p class="eyebrow">Índice</p><h1 class="display">Todos os assuntos.</h1><div class="tag-cloud">{tags.map((tag) => <a href={tagPath(tag)}><span>#{tag}</span><small>{posts.filter((post) => post.data.tags.includes(tag)).length}</small></a>)}</div></section>
 </BaseLayout>
 <style>
 .tags-page { padding-top: clamp(4rem, 10vw, 8rem); }
 .tags-page h1 { font-size: clamp(3.5rem, 9vw, 8rem); margin: .6rem 0 4rem; }
-.tag-cloud { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); border-top: 1px solid #555149; }
-.tag-cloud a { display: flex; justify-content: space-between; border-bottom: 1px solid #555149; padding: 1rem; text-decoration: none; }
-.tag-cloud a:hover { background: #2b2a28; color: #ffd178; }
-.tag-cloud small { color: #969087; }
+.tag-cloud { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); border-top: 1px solid var(--rule); }
+.tag-cloud a { display: flex; justify-content: space-between; border-bottom: 1px solid var(--rule); padding: 1rem; text-decoration: none; }
+.tag-cloud a:hover { background: var(--surface-subtle); color: var(--ink); }
+.tag-cloud small { color: var(--faint); }
 </style>

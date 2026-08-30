@@ -4,12 +4,23 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.33.0",
-  "engines": { "node": "25.x", "pnpm": "10.x" },
+  "engines": {
+    "node": "25.x",
+    "pnpm": "10.x"
+  },
   "pnpm": {
     "supportedArchitectures": {
-      "os": ["darwin", "linux"],
-      "cpu": ["arm64", "x64"],
-      "libc": ["glibc"]
+      "os": [
+        "darwin",
+        "linux"
+      ],
+      "cpu": [
+        "arm64",
+        "x64"
+      ],
+      "libc": [
+        "glibc"
+      ]
     }
   },
   "scripts": {
@@ -27,6 +38,7 @@
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/vue": "^7.0.2",
+    "@fontsource/inter": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.9",
     "medium-zoom": "^1.1.0",

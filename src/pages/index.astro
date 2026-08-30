@@ -1,28 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EditorialPostGrid from '../components/EditorialPostGrid.astro';
+import { sortByDate } from '../lib/content';
+const posts = sortByDate(await getCollection('blog'));
 ---
-<BaseLayout title="Acidiney Dias" description="Artigos e poemas de Acidiney Dias sobre tecnologia, dinheiro, Angola e a experiência de viver com atenção." canonical="/">
-  <section class="landing shell">
-    <p class="eyebrow">Caderno público · desde 2020</p>
-    <h1 class="display">Pensar devagar.<br /><em>Construir</em> com clareza.</h1>
-    <p class="intro">Um arquivo pessoal sobre tecnologia, dinheiro, Angola e a estranha tarefa de prestar atenção à vida.</p>
-    <div class="zones">
-      <a href="/blog/"><span>01 / Artigos</span><strong>Ensaios, experiências e código em contexto.</strong><i aria-hidden="true">↗</i></a>
-      <a href="/poems/"><span>02 / Poemas</span><strong>Um lugar quieto para aquilo que pede outro ritmo.</strong><i aria-hidden="true">↗</i></a>
-    </div>
-  </section>
+<BaseLayout title="Acidiney Dias" description="Textos de Acidiney Dias sobre software, trabalho, dinheiro, Angola e vida." canonical="/">
+  <EditorialPostGrid posts={posts} title="Escrevo sobre software, trabalho e as coisas que tento perceber melhor." description="Textos recentes" />
 </BaseLayout>
-<style>
-.landing { padding: clamp(5rem, 13vw, 11rem) 0 2rem; }
-.landing h1 { font-size: clamp(4rem, 12vw, 10.5rem); margin: .9rem 0 2.2rem; max-width: 1100px; }
-.landing h1 em { color: #f0b44d; font-weight: 400; }
-.intro { max-width: 630px; color: #c7c0b5; font: 400 clamp(1.25rem, 2.4vw, 1.65rem)/1.45 var(--font-display); margin-left: min(20vw, 220px); }
-.zones { margin-top: clamp(5rem, 10vw, 8rem); display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #59544c; }
-.zones a { display: grid; min-height: 220px; padding: 1.5rem; border-bottom: 1px solid #59544c; text-decoration: none; transition: background .25s ease; }
-.zones a:first-child { border-right: 1px solid #59544c; }
-.zones span { color: #a9a298; font-size: .8rem; letter-spacing: .13em; text-transform: uppercase; }
-.zones strong { align-self: center; max-width: 420px; font: 700 clamp(1.6rem, 3vw, 2.8rem)/1.05 var(--font-display); }
-.zones i { justify-self: end; color: #f0b44d; font-size: 1.7rem; }
-.zones a:hover { background: #292826; }
-@media (max-width: 700px) { .intro { margin-left: 0; } .zones { grid-template-columns: 1fr; } .zones a:first-child { border-right: 0; } }
-</style>

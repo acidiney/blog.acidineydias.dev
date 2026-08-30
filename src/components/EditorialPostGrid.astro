@@ -1,0 +1,117 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { blogImage, blogPath, formatDate } from '../lib/content';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  title?: string;
+  description?: string;
+}
+
+const { posts, title = 'Textos', description = 'Textos sobre software, trabalho, dinheiro e vida.' } = Astro.props;
+const [lead, feature, side, lower, ...rest] = posts;
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))].slice(0, 6);
+const cover = (post: CollectionEntry<'blog'>) => blogImage(post.id, post.data.featuredimg, post.data.featuredimgWidth, post.data.featuredimgHeight);
+---
+
+<section class="editorial-grid shell" aria-labelledby="editorial-title">
+  <header class="editorial-grid__intro">
+    <p class="editorial-grid__label">{description}</p>
+    <h1 id="editorial-title">{title}</h1>
+  </header>
+
+  <div class="editorial-grid__layout">
+    {lead && (() => {
+      const image = cover(lead);
+      return <article class="tile tile--lead">
+        <a href={blogPath(lead)} aria-label={`Ler artigo: ${lead.data.title}`}>
+          <img src={image.src} srcset={image.srcset} sizes="(max-width: 860px) calc(100vw - 2rem), 45vw" width={image.width} height={image.height} alt="" fetchpriority="high" />
+          <div class="tile__shade"></div>
+          <div class="tile__copy"><p>{lead.data.tags[0] ?? 'Texto'} · {formatDate(lead.data.date)}</p><h2>{lead.data.title}</h2></div>
+        </a>
+      </article>;
+    })()}
+
+    {feature && <article class="tile tile--feature">
+      <a href={blogPath(feature)}>
+        <p class="tile__meta">{feature.data.tags[0] ?? 'Texto'} · {formatDate(feature.data.date)}</p>
+        <h2>{feature.data.title}</h2>
+        <p class="tile__summary">{feature.data.summary}</p>
+        <span class="tile__link">Ler artigo <b aria-hidden="true">→</b></span>
+      </a>
+    </article>}
+
+    {side && (() => {
+      const image = cover(side);
+      return <article class="tile tile--side">
+        <a href={blogPath(side)}>
+          <img src={image.src} srcset={image.srcset} sizes="(max-width: 860px) calc(100vw - 2rem), 26vw" width={image.width} height={image.height} alt="" loading="lazy" />
+          <div class="tile__shade"></div>
+          <div class="tile__copy"><p>{side.data.tags[0] ?? 'Texto'} · {formatDate(side.data.date)}</p><h2>{side.data.title}</h2></div>
+        </a>
+      </article>;
+    })()}
+
+    {lower && (() => {
+      const image = cover(lower);
+      return <article class="tile tile--lower">
+        <a href={blogPath(lower)}>
+          <img src={image.src} srcset={image.srcset} sizes="(max-width: 860px) calc(100vw - 2rem), 35vw" width={image.width} height={image.height} alt="" loading="lazy" />
+          <div class="tile__shade"></div>
+          <div class="tile__copy"><p>{formatDate(lower.data.date)}</p><h2>{lower.data.title}</h2></div>
+        </a>
+      </article>;
+    })()}
+
+    <aside class="tile tile--topics"><p class="tile__meta">Assuntos</p><div class="topics">{tags.map((tag) => <a href={`/blog/tags/${encodeURIComponent(tag)}/`}>{tag}</a>)}</div><a class="topics__all" href="/blog/tags/">Todos os assuntos <span aria-hidden="true">→</span></a></aside>
+  </div>
+
+  {rest.length > 0 && <section class="more-posts" aria-label="Do arquivo"><p>Do arquivo</p>{rest.map((post) => <a href={blogPath(post)}><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span>{post.data.title}</span><b aria-hidden="true">→</b></a>)}</section>}
+</section>
+
+<style>
+  .editorial-grid { padding-top: clamp(3rem, 7vw, 6rem); }
+  .editorial-grid__intro { max-width: 700px; margin-bottom: clamp(3rem, 6vw, 5rem); }
+  .editorial-grid__label { color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .03em; margin: 0 0 1.2rem; text-transform: none; }
+  .editorial-grid__intro h1 { font-family: var(--font-display); font-size: clamp(2.25rem, 3.6vw, 3.3rem); margin: 0; font-weight: 650; letter-spacing: -.04em; line-height: 1.15; text-wrap: balance; }
+  .editorial-grid__layout { display: grid; grid-template-columns: 1.35fr 1.1fr .72fr; grid-template-rows: minmax(350px, 1fr) 238px; gap: 1px; padding: 0; background: var(--rule); }
+  .tile { min-width: 0; overflow: hidden; position: relative; background: var(--background); border-radius: 0; }
+  .tile a { color: inherit; text-decoration: none; }
+  .tile--lead { grid-row: span 2; }
+  .tile--lead > a, .tile--side > a, .tile--lower > a { display: block; height: 100%; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(.94) brightness(.8); transition: transform .45s cubic-bezier(.2,.7,.3,1), filter .35s ease; }
+  .tile:hover img { transform: scale(1.025); }
+  .tile__shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(18 18 18 / .92), transparent 66%); pointer-events: none; }
+  .tile__copy { position: absolute; left: 1.35rem; right: 1.35rem; bottom: 1.25rem; z-index: 1; }
+  .tile__copy { color: var(--inverse-ink); }
+  .tile__copy p, .tile__meta { margin: 0; color: #d8d7d2; font-size: .68rem; font-weight: 700; letter-spacing: .035em; text-transform: none; }
+  .tile h2 { margin: .55rem 0 0; font-family: var(--font-display); font-size: clamp(1.3rem, 1.95vw, 2.25rem); font-weight: 760; letter-spacing: -.04em; line-height: 1.08; text-wrap: balance; }
+  .tile--feature { background: var(--surface); color: var(--ink); padding: 1.65rem; }
+  .tile--feature > a { display: flex; height: 100%; flex-direction: column; }
+  .tile--feature .tile__meta { color: var(--faint); }
+  .tile--feature h2 { max-width: 590px; margin-top: 1rem; font-size: clamp(1.7rem, 2.45vw, 2.85rem); line-height: 1.04; }
+  .tile__summary { color: var(--muted); display: -webkit-box; font-size: .86rem; line-height: 1.5; margin: .85rem 0; max-width: 560px; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+  .tile__link { display: flex; justify-content: space-between; border-top: 1px solid var(--rule); margin-top: auto; padding-top: .8rem; font-size: .82rem; font-weight: 700; }
+  .tile__link b { font-size: 1.2rem; font-weight: 500; }
+  .tile--side { background: var(--background); color: var(--inverse-ink); }
+  .tile--side img { position: static; height: 100%; }
+  .tile--side .tile__shade { display: block; }
+  .tile--side .tile__copy { top: auto; bottom: 1.25rem; }
+  .tile--side .tile__copy p { color: #d8d7d2; }
+  .tile--side h2 { font-size: clamp(1.25rem, 1.85vw, 2.05rem); }
+  .tile--lower { grid-column: 2; }
+  .tile--lower h2 { font-size: clamp(1.2rem, 1.9vw, 2rem); }
+  .tile--topics { grid-column: 3; padding: 1.35rem; display: flex; flex-direction: column; background: var(--surface); color: var(--ink); }
+  .tile--topics .tile__meta { color: var(--faint); }
+  .topics { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1rem; }
+  .topics a { border-bottom: 1px solid var(--rule); color: var(--muted); padding: .25rem 0; font-size: .72rem; }
+  .topics__all { display: flex; justify-content: space-between; align-items: center; color: var(--ink); font-size: .9rem; font-weight: 700; margin-top: auto; padding-top: 1rem; }
+  .topics__all span { font-size: 1.25rem; }
+  .more-posts { max-width: 900px; margin: 3rem 0 0 auto; }
+  .more-posts > p { color: var(--muted); font-size: .73rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .8rem; }
+  .more-posts a { border-top: 1px solid var(--rule); display: grid; grid-template-columns: 120px 1fr auto; gap: 1rem; align-items: baseline; color: inherit; padding: 1rem 0; text-decoration: none; }
+  .more-posts time { color: var(--muted); font-size: .76rem; }
+  .more-posts span { font-size: 1.15rem; font-weight: 700; letter-spacing: -.025em; }
+  .more-posts b { color: var(--muted); font-weight: 500; }
+  @media (max-width: 860px) { .editorial-grid__intro { margin-bottom: 3rem; }.editorial-grid__layout { grid-template-columns: 1fr; grid-template-rows: 460px 400px 320px 280px 240px; padding: 0; }.tile--lead,.tile--lower,.tile--topics { grid-row: auto; grid-column: auto; }.tile--feature { padding: 1.45rem; }.tile--feature h2 { font-size: clamp(1.9rem, 8vw, 3.15rem); }.tile--side h2 { font-size: 2rem; }.more-posts { margin-top: 2.5rem; }.more-posts a { grid-template-columns: 85px 1fr auto; }.more-posts span { font-size: 1rem; } }
+</style>

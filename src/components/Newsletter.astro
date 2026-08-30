@@ -2,12 +2,12 @@
 const endpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT;
 ---
 {endpoint && <section class="newsletter" data-testid="newsletter" aria-labelledby="newsletter-title">
-  <p class="eyebrow">Correspondência rara</p>
-  <h2 id="newsletter-title">Novos textos, sem ruído.</h2>
-  <p>Receba um aviso quando uma ideia nova encontrar forma.</p>
+  <p class="eyebrow">Por email</p>
+  <h2 id="newsletter-title">Novos textos por email.</h2>
+  <p>Envio um email quando publico um texto novo.</p>
   <form action={endpoint} method="post">
-    <label class="sr-only" for="newsletter-email">O seu email</label>
-    <input id="newsletter-email" name="EMAIL" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+    <label class="sr-only" for="newsletter-email">Email</label>
+    <input id="newsletter-email" name="EMAIL" type="email" autocomplete="email" placeholder="nome@exemplo.com" required />
     <button type="submit">Subscrever</button>
   </form>
 </section>}

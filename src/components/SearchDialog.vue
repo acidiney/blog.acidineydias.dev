@@ -74,7 +74,7 @@ async function search() {
   } catch {
     results.value = [];
     searched.value = true;
-    errorMessage.value = 'Não foi possível pesquisar. Tente novamente.';
+    errorMessage.value = 'A pesquisa falhou. Tente outra vez.';
   } finally { loading.value = false; }
 }
 </script>
@@ -83,23 +83,23 @@ async function search() {
   <button class="search-button" type="button" data-testid="search-trigger" aria-label="Pesquisar no site" @click="show">Pesquisar <span aria-hidden="true">⌕</span></button>
   <dialog ref="dialog" class="search-dialog" data-testid="search-dialog" aria-labelledby="search-dialog-title" @close="open = false">
     <header class="search-dialog__header">
-      <h2 id="search-dialog-title">Pesquisar nos textos</h2>
+      <h2 id="search-dialog-title">Pesquisar</h2>
       <button class="close" type="button" aria-label="Fechar pesquisa" @click="close">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
       </button>
     </header>
     <form class="search-bar" @submit.prevent="search">
-      <label class="sr-only" for="site-search">Pesquisar artigos</label>
-      <input id="site-search" v-model="query" type="search" placeholder="Procure uma ideia…" autocomplete="off">
+      <label class="sr-only" for="site-search">Pesquisar no site</label>
+      <input id="site-search" v-model="query" type="search" placeholder="Escreva uma palavra ou título" autocomplete="off">
       <button class="submit" type="submit">
         <span>Pesquisar</span>
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg>
       </button>
     </form>
     <div class="search-content" data-testid="search-results" aria-live="polite">
-      <p v-if="loading" class="search-status" role="status">A procurar…</p>
+      <p v-if="loading" class="search-status" role="status">A pesquisar…</p>
       <p v-else-if="errorMessage" class="search-status search-status--error">{{ errorMessage }}</p>
-      <p v-else-if="searched && !results.length" class="search-status">Nenhum texto encontrado.</p>
+      <p v-else-if="searched && !results.length" class="search-status">Nenhum resultado.</p>
       <ol v-else-if="results.length" class="results">
         <li v-for="result in results" :key="result.id">
           <a :href="result.url" @click="close">{{ result.title }}</a>

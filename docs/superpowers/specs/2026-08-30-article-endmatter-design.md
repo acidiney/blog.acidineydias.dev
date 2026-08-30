@@ -11,7 +11,7 @@ Replace the loose blocks below each article with one compact closing section on 
 - Do not render the newsletter when its endpoint is not configured.
 - When configured, keep advertisements and the newsletter inside the same 960px axis with restrained spacing.
 - Place the conversation section after the configured integrations.
-- Separate the conversation from preceding content with one hairline rule.
+- Let the preceding tags establish the closing rhythm; do not add another rule or top margin around the conversation.
 - Let the Disqus interface provide its own comment heading; do not repeat it in the page shell.
 - Use the approved Söhne/Helvetica display stack for every heading and Inter for body copy; do not introduce a third typeface.
 - Avoid cards, backgrounds, rounded containers, oversized type, and large empty bands.

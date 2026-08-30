@@ -13,6 +13,6 @@ const { poem } = Astro.props as { poem: CollectionEntry<'poems'> };
 <style>
 .poem { width: min(660px, calc(100% - 2rem)); margin: clamp(5rem, 14vw, 12rem) auto; }
 .poem header { margin-bottom: 4rem; }
-.poem h1 { color: #fffaf0; font: 400 clamp(3.5rem, 10vw, 7.5rem)/.95 var(--font-display); letter-spacing: -.045em; margin: .5rem 0; }
-.poem__body { color: #e8e1d6; font: 400 clamp(1.25rem, 2.2vw, 1.55rem)/2 var(--font-display); white-space: pre-line; }
+.poem h1 { color: var(--ink); font: 400 clamp(3.5rem, 10vw, 7.5rem)/.95 var(--font-display); letter-spacing: -.045em; margin: .5rem 0; }
+.poem__body { color: #2a2926; font: 400 clamp(1.25rem, 2.2vw, 1.55rem)/2 var(--font-display); white-space: pre-line; }
 </style>

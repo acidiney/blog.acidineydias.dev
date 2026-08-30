@@ -3,23 +3,55 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatDate, poemPath, sortByDate } from '../../lib/content';
 const poems = sortByDate(await getCollection('poems'));
+const isEmpty = poems.length === 0;
 ---
-<BaseLayout title="Poemas" description="O espaço de poesia de Acidiney Dias — uma coleção em preparação." canonical="/poems/">
+<BaseLayout title="Poemas" description="Poemas de Acidiney Dias." canonical="/poems/">
   <section class="poems shell" data-testid="poems-index" data-pagefind-ignore>
     <p class="eyebrow">Poemas</p>
-    <h1 class="display">Há páginas que começam em silêncio.</h1>
-    {poems.length === 0 ? (
-      <div class="empty"><span aria-hidden="true">∴</span><p>Este espaço ainda não tem poemas publicados.</p><small>Quando houver palavras para este ritmo, elas viverão aqui — sem anúncios, comentários ou interrupções.</small><a href="/blog/">Enquanto isso, leia os artigos →</a></div>
-    ) : <ol>{poems.map((poem) => <li><time datetime={poem.data.date.toISOString()}>{formatDate(poem.data.date)}</time><a href={poemPath(poem)}>{poem.data.title}</a></li>)}</ol>}
+    <div class:list={["poems__composition", { "poems__composition--list": !isEmpty }]}>
+      <h1 class="display">Há páginas que começam em silêncio.</h1>
+      {isEmpty ? (
+        <div class="empty">
+          <p>Ainda não publiquei poemas aqui.</p>
+          <small>Quando publicar o primeiro poema, ele aparecerá aqui.</small>
+          <a href="/blog/">Até lá, leia os artigos →</a>
+        </div>
+      ) : (
+        <ol>{poems.map((poem) => <li><time datetime={poem.data.date.toISOString()}>{formatDate(poem.data.date)}</time><a href={poemPath(poem)}>{poem.data.title}</a></li>)}</ol>
+      )}
+    </div>
   </section>
 </BaseLayout>
 <style>
-.poems { width: min(860px, calc(100% - 2rem)); padding-top: clamp(5rem, 14vw, 11rem); min-height: 70vh; }
-.poems h1 { font-size: clamp(4rem, 11vw, 9rem); margin: .8rem 0 5rem; }
-.empty { max-width: 600px; margin-left: auto; border-top: 1px solid #69635a; padding-top: 1.5rem; }
-.empty > span { color: #f0b44d; font: 400 3rem var(--font-display); }
-.empty p { font: 400 1.6rem var(--font-display); margin: .4rem 0; }
-.empty small { display: block; color: #aaa49b; font-size: 1rem; line-height: 1.55; }
-.empty a { display: inline-block; margin-top: 2rem; color: #ffd178; font-weight: 800; }
-.poems ol { list-style: none; padding: 0; }.poems li { display: grid; grid-template-columns: 150px 1fr; border-top: 1px solid #59544c; padding: 1rem 0; }.poems li a { font: 700 2rem var(--font-display); }
+/* Route-local layout: the poems index shares the outer shell spine with the
+   header/footer, then pairs the title and the empty message in a 12-column
+   composition on wide viewports and a single deliberate stack on narrow ones. */
+.poems { padding-top: clamp(3.5rem, 10vw, 8rem); padding-bottom: clamp(3.5rem, 10vw, 8rem); }
+.poems .eyebrow { margin: 0 0 clamp(1rem, 2.5vw, 1.75rem); }
+.poems h1 { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.04; margin: 0; }
+
+.poems__composition { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(1.5rem, 4vw, 3.25rem); row-gap: clamp(1.75rem, 4vw, 2.75rem); align-items: end; }
+.poems__composition h1 { grid-column: 1 / 9; min-width: 0; max-width: min(14ch, 100%); }
+.empty { grid-column: 9 / 13; min-width: 0; max-width: 34ch; }
+.empty p { font: 400 clamp(1.25rem, 1.8vw, 1.5rem)/1.3 var(--font-display); margin: 0 0 .7rem; text-wrap: balance; }
+.empty small { display: block; color: var(--muted); font-size: .95rem; line-height: 1.55; }
+.empty a { display: inline-block; margin-top: 1.35rem; padding-bottom: 1px; border-bottom: 1px solid var(--rule); color: var(--muted); font-size: .95rem; font-weight: 400; text-decoration: none; }
+.empty a:hover { color: var(--ink); }
+
+.poems__composition--list { display: block; }
+.poems__composition--list h1 { max-width: 22ch; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+.poems ol { list-style: none; padding: 0; margin: 0; max-width: 760px; }
+.poems li { display: grid; grid-template-columns: 150px 1fr; border-top: 1px solid var(--rule); padding: 1rem 0; }
+.poems li a { font: 700 2rem var(--font-display); }
+
+@media (max-width: 60em) {
+  .poems__composition { grid-template-columns: 1fr; }
+  .poems__composition h1, .empty { grid-column: auto; max-width: none; }
+  .empty { max-width: 42ch; }
+}
+@media (max-width: 26em) {
+  .poems { padding-top: 2.5rem; padding-bottom: 3rem; }
+  .poems h1 { font-size: 2.35rem; line-height: 1.1; }
+  .empty p { font-size: 1.3rem; }
+}
 </style>

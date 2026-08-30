@@ -1,26 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostCard from '../../components/PostCard.astro';
-import { POSTS_PER_PAGE, sortByDate } from '../../lib/content';
+import EditorialPostGrid from '../../components/EditorialPostGrid.astro';
+import { sortByDate } from '../../lib/content';
 const posts = sortByDate(await getCollection('blog'));
-const visible = posts.slice(0, POSTS_PER_PAGE);
 ---
-<BaseLayout title="Artigos" description="Ensaios e notas de Acidiney Dias sobre tecnologia, dinheiro, Angola e crescimento pessoal." canonical="/blog/">
-  <section class="listing shell">
-    <header class="listing__header"><p class="eyebrow">Artigos</p><h1 class="display">Notas de campo para uma vida em construção.</h1><p>Experiências técnicas e pessoais, escritas para serem úteis depois da novidade passar.</p></header>
-    <div class="posts">{visible.map((post, index) => <PostCard post={post} featured={index === 0} />)}</div>
-    <nav class="pagination" aria-label="Paginação"><span>Página 1 de {Math.ceil(posts.length / POSTS_PER_PAGE)}</span><a href="/blog/page/2/">Mais antigos →</a></nav>
-  </section>
+<BaseLayout title="Artigos" description="Textos de Acidiney Dias sobre software, trabalho, dinheiro, Angola e vida." canonical="/blog/">
+  <EditorialPostGrid posts={posts} title="Todos os artigos." description="Arquivo" />
 </BaseLayout>
-<style>
-.listing { padding-top: clamp(4rem, 10vw, 8rem); }
-.listing__header { display: grid; grid-template-columns: 1fr 2fr; align-items: end; gap: 2rem; margin-bottom: 5rem; }
-.listing__header .eyebrow { align-self: start; }
-.listing__header h1 { grid-column: 2; font-size: clamp(3.2rem, 8vw, 7rem); margin: 0; max-width: 900px; }
-.listing__header > p:last-child { grid-column: 2; max-width: 560px; color: #bdb7ac; font: 400 1.25rem/1.5 var(--font-display); }
-.posts { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.5rem; }
-.pagination { display: flex; justify-content: space-between; border-top: 1px solid #565149; padding-top: 1.3rem; margin-top: 2rem; color: #aca69c; }
-.pagination a { color: #ffd178; font-weight: 800; }
-@media (max-width: 860px) { .listing__header { display: block; } .listing__header h1 { margin: 1rem 0; } .posts { grid-template-columns: 1fr; } }
-</style>

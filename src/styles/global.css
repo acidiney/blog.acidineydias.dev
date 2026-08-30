@@ -14,7 +14,8 @@
 :root { color-scheme: light; --background: #f4f2ec; --surface: #faf9f5; --surface-subtle: #eae7df; --primary: #212121; --ink: #212121; --muted: #6b6963; --faint: #625f58; --rule: #cfcbc1; --soft-rule: #ddd9d0; --inverse-ink: #f7f6f2; }
 * { box-sizing: border-box; }
 html { background: var(--background); scroll-behavior: smooth; }
-body { min-height: 100vh; margin: 0; background: var(--background); color: var(--ink); font-family: var(--font-body); font-size: 1rem; line-height: 1.6; }
+body { min-height: 100vh; margin: 0; display: flex; flex-direction: column; background: var(--background); color: var(--ink); font-family: var(--font-body); font-size: 1rem; line-height: 1.6; }
+body > main { flex: 1 0 auto; }
 a { color: inherit; text-underline-offset: .2em; }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
 img { max-width: 100%; height: auto; }
@@ -33,7 +34,7 @@ img { max-width: 100%; height: auto; }
 .nav a { color: var(--muted); font-size: .82rem; font-weight: 650; text-decoration: none; }
 .nav a:hover { color: var(--ink); }
 .search-button { border: 0; background: transparent; color: var(--muted); cursor: pointer; padding: .5rem; }
-.footer { border-top: 1px solid var(--rule); color: var(--faint); margin-top: 5rem; padding: 1.7rem 0 2.5rem; font-size: .82rem; }
+.footer { border-top: 1px solid var(--rule); color: var(--faint); margin-top: 5rem; padding: 1.7rem 0; font-size: .82rem; }
 .footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
 .prose { width: 100%; color: #2a2926; font-family: "Inter", ui-sans-serif, system-ui, sans-serif; font-size: clamp(1.2rem, 1.55vw, 1.3rem); line-height: 1.76; }
 .prose > p { margin: 2.14em 0 0; font-family: "Inter", ui-sans-serif, system-ui, sans-serif; line-height: 32px; }

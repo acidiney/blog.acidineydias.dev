@@ -11,7 +11,7 @@ test('landing page navigates into both editorial zones', async ({ page }) => {
   await expect(page).toHaveURL(/\/blog\/$/);
   await page.getByRole('link', { name: 'Poemas', exact: true }).click();
   await expect(page).toHaveURL(/\/poems\/$/);
-  await expect(page.getByTestId('poems-index')).toContainText('ainda não tem poemas');
+  await expect(page.getByTestId('poems-index')).toContainText('Ainda não publiquei poemas aqui.');
 });
 
 test('all eight posts are reachable from the editorial index', async ({ page }) => {
@@ -38,6 +38,62 @@ test('poems never load blog-only integrations', async ({ page }) => {
   page.on('request', (request) => { if (!request.url().startsWith('http://127.0.0.1:4321')) thirdParty.add(new URL(request.url()).hostname); });
   await page.reload();
   expect([...thirdParty]).toEqual([]);
+});
+
+test('poems empty state holds the editorial composition across breakpoints', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile-chromium');
+  await page.setViewportSize({ width: 1974, height: 1336 });
+  await page.goto('/poems/');
+
+  const wide = await page.locator('.poems h1').evaluate((element) => {
+    const style = getComputedStyle(element);
+    const fontSize = parseFloat(style.fontSize);
+    const titleBox = element.getBoundingClientRect();
+    const emptyBox = document.querySelector('.empty')!.getBoundingClientRect();
+    const spineBox = document.querySelector('[data-testid="site-header"] .shell')!.getBoundingClientRect();
+    const contentBox = document.querySelector('[data-testid="poems-index"]')!.getBoundingClientRect();
+    const footerBox = document.querySelector('.footer')!.getBoundingClientRect();
+    return {
+      fontSize,
+      lineHeightRatio: parseFloat(style.lineHeight) / fontSize,
+      onSpine: Math.abs(contentBox.left - spineBox.left) <= 1,
+      messageRightOfTitle: emptyBox.left >= titleBox.right,
+      messageAlignedToTitleFoot: Math.abs(emptyBox.bottom - titleBox.bottom) <= 4,
+      pageOverflows: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+      footerAtViewportBottom: Math.abs(footerBox.bottom - window.innerHeight) <= 1,
+      documentScrolls: document.documentElement.scrollHeight > window.innerHeight + 1,
+    };
+  });
+
+  expect(wide.fontSize).toBeLessThanOrEqual(80);
+  expect(wide.lineHeightRatio).toBeGreaterThanOrEqual(1.04);
+  expect(wide.onSpine).toBe(true);
+  expect(wide.messageRightOfTitle).toBe(true);
+  expect(wide.messageAlignedToTitleFoot).toBe(true);
+  expect(wide.pageOverflows).toBe(false);
+  expect(wide.footerAtViewportBottom).toBe(true);
+  expect(wide.documentScrolls).toBe(false);
+  await expect(page.getByText('∴')).toHaveCount(0);
+
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.reload();
+
+  const narrow = await page.evaluate(() => {
+    const titleBox = document.querySelector('.poems h1')!.getBoundingClientRect();
+    const emptyBox = document.querySelector('.empty')!.getBoundingClientRect();
+    const clientWidth = document.documentElement.clientWidth;
+    return {
+      stacksInOrder: titleBox.bottom <= emptyBox.top + 1,
+      sharedColumn: Math.abs(titleBox.left - emptyBox.left) <= 1,
+      titleUsesWidth: titleBox.width >= clientWidth - 40,
+      pageOverflows: document.documentElement.scrollWidth > clientWidth,
+    };
+  });
+
+  expect(narrow.stacksInOrder).toBe(true);
+  expect(narrow.sharedColumn).toBe(true);
+  expect(narrow.titleUsesWidth).toBe(true);
+  expect(narrow.pageOverflows).toBe(false);
 });
 
 test('Pagefind returns a known article through the real search UI', async ({ page }) => {
@@ -225,5 +281,5 @@ test('SEO, feeds and custom 404 are served from the built site', async ({ page, 
   expect((await poemsFeed.text()).match(/<item>/g) ?? []).toHaveLength(0);
   // Netlify maps unknown paths to this artifact; the raw static server does not emulate that host behavior.
   await page.goto('/404.html');
-  await expect(page.getByText('Esta página saiu da margem.')).toBeVisible();
+  await expect(page.getByText('Esta página não está aqui.')).toBeVisible();
 });
