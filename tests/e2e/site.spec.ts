@@ -128,6 +128,40 @@ test('desktop article TOC tracks H2 and H3 reading progress', async ({ page }, t
   await expect(page.getByTestId('blog-toc').locator('[aria-current="location"]')).toHaveCount(1);
 });
 
+test('desktop article TOC fill grows continuously inside the current section', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile-chromium');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/blog/um-pouco-sobre-offline-first-e-granularidade/');
+  const heading = page.getByRole('heading', { name: 'Proxy', exact: true });
+  const list = page.getByTestId('blog-toc').locator('[data-toc-list]');
+  await heading.evaluate((element) => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, (element as HTMLElement).offsetTop - 120);
+  });
+  const progressBefore = await list.evaluate((element) => parseFloat(getComputedStyle(element, '::after').height));
+  await page.evaluate(() => window.scrollBy(0, 100));
+  const progressAfter = await list.evaluate((element) => parseFloat(getComputedStyle(element, '::after').height));
+  await expect(page.getByTestId('blog-toc').locator('[aria-current="location"]')).toContainText('Proxy');
+  expect(progressAfter).toBeGreaterThan(progressBefore);
+
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  const endState = await list.evaluate((element) => ({
+    progress: parseFloat(getComputedStyle(element, '::after').height),
+    track: parseFloat(getComputedStyle(element, '::before').height),
+  }));
+  expect(Math.abs(endState.track - endState.progress)).toBeLessThanOrEqual(1);
+});
+
+test('desktop article TOC gives orphan H3 headings a readable root layout', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile-chromium');
+  await page.goto('/blog/pare-de-limitar-o-frontend/');
+  const toc = page.getByTestId('blog-toc');
+  const firstItem = toc.locator('[data-toc-item]').first();
+  await expect(firstItem).toHaveClass(/depth-2/);
+  expect((await toc.boundingBox())!.width).toBeGreaterThanOrEqual(210);
+  await expect(toc).toHaveCSS('border-left-width', '0px');
+});
+
 test('mobile article TOC keeps its compact active state and no-heading fallback', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile-chromium');
   await page.goto('/blog/um-pouco-sobre-offline-first-e-granularidade/');

@@ -1,7 +1,14 @@
 ---
 import type { MarkdownHeading } from 'astro';
 const { headings } = Astro.props as { headings: MarkdownHeading[] };
-const items = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+let hasLevelTwoParent = false;
+const items = headings
+  .filter((heading) => heading.depth === 2 || heading.depth === 3)
+  .map((heading) => {
+    const visualDepth = heading.depth === 3 && hasLevelTwoParent ? 3 : 2;
+    if (heading.depth === 2) hasLevelTwoParent = true;
+    return { ...heading, visualDepth };
+  });
 ---
 <nav class="toc" data-testid="blog-toc" aria-label="Neste artigo">
   <a class="toc-brand" href="/" aria-label="blog.acidineydias.dev">
@@ -9,7 +16,7 @@ const items = headings.filter((heading) => heading.depth === 2 || heading.depth 
     <span>blog.acidineydias.dev</span>
   </a>
   <p>Neste artigo</p>
-  {items.length ? <ol data-toc-list>{items.map((heading) => <li class={`depth-${heading.depth}`} data-toc-item><a data-toc-link href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol> : <span class="muted">Leitura contínua</span>}
+  {items.length ? <ol data-toc-list>{items.map((heading) => <li class={`depth-${heading.visualDepth}`} data-toc-item><a data-toc-link href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol> : <span class="muted">Leitura contínua</span>}
 </nav>
 <script>
 const toc = document.querySelector<HTMLElement>('[data-testid="blog-toc"]');
@@ -55,7 +62,15 @@ if (toc && list && entries.length) {
     });
 
     const active = entries[activeIndex];
-    const progress = active.item.offsetTop + active.item.clientHeight / 2;
+    const next = entries[activeIndex + 1];
+    const activeScroll = window.scrollY + active.heading.getBoundingClientRect().top - threshold;
+    const nextScroll = next
+      ? window.scrollY + next.heading.getBoundingClientRect().top - threshold
+      : Math.max(activeScroll + 1, document.documentElement.scrollHeight - window.innerHeight);
+    const sectionProgress = Math.min(1, Math.max(0, (window.scrollY - activeScroll) / (nextScroll - activeScroll)));
+    const activeMarker = active.item.offsetTop + active.item.clientHeight / 2;
+    const nextMarker = next ? next.item.offsetTop + next.item.clientHeight / 2 : list.scrollHeight;
+    const progress = activeMarker + (nextMarker - activeMarker) * sectionProgress;
     list.style.setProperty('--toc-progress', `${progress}px`);
 
     if (currentLink !== active.link) {
@@ -76,22 +91,22 @@ if (toc && list && entries.length) {
 }
 </script>
 <style>
-.toc { position: sticky; top: 1.5rem; max-height: calc(100vh - 3rem); overflow: auto; border-left: 1px solid var(--rule); padding-left: 1rem; font-size: .78rem; }
-.toc-brand { display: block; margin-bottom: 2rem; color: var(--ink); text-decoration: none; }
-.toc-brand img { display: block; width: 40px; height: 40px; margin-bottom: .55rem; border-radius: 7px; object-fit: cover; }
-.toc-brand span { font-size: .65rem; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; }
-.toc > p { color: var(--ink); font-weight: 700; margin-top: 0; }
-.toc ol { --toc-progress: 0px; position: relative; list-style: none; margin: 1rem 0 0; padding: .1rem 0 .1rem 1.25rem; }
+.toc { position: sticky; top: 1.5rem; max-height: calc(100vh - 3rem); overflow: auto; font-size: .74rem; }
+.toc-brand { display: block; margin-bottom: 1.6rem; color: var(--ink); text-decoration: none; }
+.toc-brand img { display: block; width: 36px; height: 36px; margin-bottom: .5rem; border-radius: 7px; object-fit: cover; }
+.toc-brand span { font-size: .62rem; font-weight: 650; letter-spacing: -.015em; white-space: nowrap; }
+.toc > p { color: var(--ink); font-size: .72rem; font-weight: 700; margin: 0 0 .9rem; }
+.toc ol { --toc-progress: 0px; position: relative; list-style: none; margin: 0; padding: .1rem 0 .1rem 1.2rem; }
 .toc ol::before, .toc ol::after { content: ''; position: absolute; left: 0; top: 0; width: 1px; }
 .toc ol::before { bottom: 0; background: var(--rule); }
 .toc ol::after { height: var(--toc-progress); background: var(--ink); transition: height 180ms ease-out; }
-.toc li { position: relative; margin: .72rem 0; line-height: 1.3; }
-.toc .depth-3 { padding-left: .85rem; }
-.toc .depth-3::before { content: ''; position: absolute; left: -1.25rem; top: .65em; width: 1rem; border-top: 1px solid var(--rule); }
+.toc li { position: relative; margin: .68rem 0; line-height: 1.35; }
+.toc .depth-3 { padding-left: .75rem; }
+.toc .depth-3::before { content: ''; position: absolute; left: -1.2rem; top: .68em; width: .9rem; border-top: 1px solid var(--rule); }
 .toc .depth-3[data-passed]::before { border-color: var(--ink); }
 .toc a { color: var(--muted); text-decoration: none; }
 .toc li[data-passed] a, .toc a[aria-current='location'] { color: var(--ink); }
-.toc a[aria-current='location'] { font-weight: 700; }
+.toc a[aria-current='location'] { font-weight: 650; }
 .toc a:hover { color: var(--ink); }
 @media (max-width: 980px) {
   .toc { position: static; max-height: none; margin-bottom: 2.5rem; overflow: visible; border-left: 0; border-block: 1px solid var(--rule); padding: .85rem 0; }

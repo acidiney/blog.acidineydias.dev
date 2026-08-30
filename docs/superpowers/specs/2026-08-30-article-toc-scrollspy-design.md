@@ -7,10 +7,13 @@ Turn the article table of contents into a quiet reading-position indicator inspi
 ## Visual behavior
 
 - Keep the existing brand signature above the index.
+- Reserve a 220px desktop rail so titles remain readable.
 - Draw one neutral vertical spine beside the heading list.
-- Indent level-three headings and connect them to the spine with a short horizontal branch.
+- Do not add a second separator around the TOC.
+- Indent level-three headings and connect them to the spine only after a level-two parent has appeared. Treat orphan level-three headings as top-level items.
 - Render inactive headings and line segments with the existing muted tokens.
-- Render the current heading and its line segment with `#212121`.
+- Fill the spine progressively to the current heading and render the passed headings and branches with `#212121`.
+- Keep labels compact and limit the current heading to a medium weight.
 - Avoid cards, new colors, shadows, pills, or decorative containers.
 
 ## Scroll behavior
