@@ -19,7 +19,14 @@ const pageTwo = readFileSync(join(dist, 'blog/page/2/index.html'), 'utf8');
 if (existsSync(join(dist, 'blog/page/1/index.html'))) fail('/blog/page/1/ must not be generated');
 if (!pageTwo.includes('href="/blog/"')) fail('page 2 must link back to canonical page 1');
 const cards = (html: string) => (html.match(/data-testid="blog-card"/g) ?? []).length;
-if (cards(pageOne) !== 6 || cards(pageTwo) !== 2) fail(`pagination invariant failed: ${cards(pageOne)} / ${cards(pageTwo)}`);
+const articlePaths = (html: string) => new Set(
+  [...html.matchAll(/href="(\/blog\/[^"#?]+\/)"/g)]
+    .map(([, path]) => path)
+    .filter((path) => !/^\/blog\/(?:page|tags)\//.test(path)),
+);
+if (articlePaths(pageOne).size !== 8 || cards(pageTwo) !== 2) {
+  fail(`editorial index invariant failed: ${articlePaths(pageOne).size} articles / ${cards(pageTwo)} page 2 cards`);
+}
 
 const countItems = (path: string) => (readFileSync(path, 'utf8').match(/<item>/g) ?? []).length;
 if (countItems(join(dist, 'blog/rss.xml')) !== 8) fail('blog RSS must contain 8 items');
@@ -52,7 +59,7 @@ const portuguese = readFileSync(join(dist, 'blog/a-minha-primeira-vez/index.html
 const english = readFileSync(join(dist, 'blog/i-will-never-be-25-years-old-again/index.html'), 'utf8');
 if (!portuguese.includes('<html lang="pt">') || !english.includes('<html lang="en">')) fail('article language metadata is incorrect');
 for (const token of ['googletagmanager.com', 'pagead2.googlesyndication.com']) if (portuguese.includes(token)) fail(`credential-free output leaked ${token}`);
-if (!portuguese.includes('data-testid="ad-slot"') || !portuguese.includes('data-configured="false"')) fail('credential-free ad state is incorrect');
+if (portuguese.includes('data-testid="ad-slot"')) fail('credential-free output rendered an ad slot');
 if (/<section class="newsletter"[\s\S]*?<form/.test(portuguese)) fail('credential-free newsletter rendered a form');
 
-console.log(`Verified ${posts.length} posts, ${htmlFiles.length} HTML files, pagination 6/2, feeds 8/0, sitemap host, Pagefind, and internal links.`);
+console.log(`Verified ${posts.length} posts, ${htmlFiles.length} HTML files, editorial index 8/2, feeds 8/0, sitemap host, Pagefind, and internal links.`);
