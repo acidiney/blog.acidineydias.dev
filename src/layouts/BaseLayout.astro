@@ -10,6 +10,7 @@ const canonicalUrl = new URL(canonical, Astro.site);
 const imageUrl = new URL(image, Astro.site);
 const fullTitle = title === 'Acidiney Dias' ? title : `${title} · Acidiney Dias`;
 const gaId = import.meta.env.PUBLIC_GA_ID;
+const adsenseClient = import.meta.env.VUE_GOOGLE_ADSENSE;
 ---
 <!doctype html>
 <html lang={language}>
@@ -37,6 +38,7 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
     <link rel="apple-touch-icon" href="/assets/img/acidiney-brand.jpg" />
     <meta name="theme-color" content="#f4f2ec" />
     {preloadImage && <link rel="preload" as="image" href={preloadImage.src} imagesrcset={preloadImage.srcset} imagesizes="(max-width: 1092px) calc(100vw - 2rem), 1060px" fetchpriority="high" />}
+    {adsenseClient && <script is:inline async crossorigin="anonymous" src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}></script>}
     {gaId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>}
     {gaId && <script is:inline define:vars={{ gaId }}>
       window.dataLayer = window.dataLayer || [];

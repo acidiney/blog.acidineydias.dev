@@ -3,7 +3,6 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import BlogToc from '../components/BlogToc.astro';
 import Newsletter from '../components/Newsletter.astro';
-import AdSlot from '../components/AdSlot.astro';
 import DisqusThread from '../components/DisqusThread.astro';
 import { blogImage, blogPath, formatDate, readingTimeMinutes, tagPath } from '../lib/content';
 import type { MarkdownHeading } from 'astro';
@@ -34,7 +33,6 @@ const byline = post.data.language === 'en'
     <footer class="article__footer">
       <div class="article__content">
         <div class="tags">{post.data.tags.map((tag) => <a href={tagPath(tag)}>#{tag}</a>)}</div>
-        <AdSlot />
         <Newsletter />
         <DisqusThread legacyPath={post.data.legacyPath} legacyIdentifier={post.data.legacyIdentifier} title={post.data.title} />
       </div>

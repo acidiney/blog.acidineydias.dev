@@ -19,7 +19,7 @@ pnpm exec playwright install chromium
 pnpm test:e2e
 ```
 
-`pnpm verify` runs the complete check, unit, configured-integration fixture build, normal build, static-output, and browser-test sequence. `verify:configured` builds into a temporary directory with safe dummy public values and inspects rendered HTML for GA, AdSense, and newsletter markup; it never serves the build or contacts those services. Normal tests and local builds require no external service credentials and make no third-party requests.
+`pnpm verify` runs the complete check, unit, configured-integration fixture build, normal build, static-output, and browser-test sequence. `verify:configured` builds into a temporary directory with safe dummy configuration values and inspects rendered HTML for GA, AdSense, and newsletter markup; it never serves the build or contacts those services. Normal tests and local builds require no external service credentials and make no third-party requests.
 
 ## Content
 
@@ -30,14 +30,13 @@ Both collections are validated by `src/content.config.ts`. Articles require a fe
 
 Article frontmatter includes `legacyPath`, which keeps old URLs and Disqus page URLs stable. The one recoverable historical VuePress Disqus hash is stored as `legacyIdentifier` on `refazendo-meu-portfolio-parte-1.md`; all other old hash identifiers depended on an unrecoverable VuePress build path, so those threads fall back to the legacy canonical URL rather than a fabricated hash.
 
-## Optional public environment variables
+## Optional build environment variables
 
 | Variable | Purpose |
 | --- | --- |
 | `PUBLIC_GA_ID` | Loads Google Analytics only when set |
-| `PUBLIC_ADSENSE_CLIENT` | AdSense client, blog pages only |
-| `PUBLIC_ADSENSE_SLOT` | AdSense slot paired with the client |
+| `VUE_GOOGLE_ADSENSE` | AdSense publisher ID used to load Auto Ads on every page |
 | `PUBLIC_NEWSLETTER_ENDPOINT` | Newsletter form endpoint; without it the form is non-submitting |
 | `PUBLIC_DISQUS_SHORTNAME` | Disqus shortname; defaults to the historical `acidineydias` |
 
-Never place private keys in `PUBLIC_*` variables: Astro exposes them to the browser. Redirects live in `netlify.toml`; the verifier tests every dated and short legacy post mapping without relying on static-server redirect emulation.
+Never place private keys in `PUBLIC_*` variables: Astro exposes them to the browser. `VUE_GOOGLE_ADSENSE` is a publisher ID, so the generated page includes it in the AdSense script URL. Redirects live in `netlify.toml`; the verifier tests every dated and short legacy post mapping without relying on static-server redirect emulation.

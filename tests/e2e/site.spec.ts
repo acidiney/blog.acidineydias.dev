@@ -26,14 +26,13 @@ test('all eight posts are reachable from the editorial index', async ({ page }) 
     await expect(page.getByTestId('blog-post')).toBeVisible();
     await expect(page.getByTestId('blog-toc')).toBeVisible();
     await expect(page.getByTestId('newsletter')).toHaveCount(0);
-    await expect(page.getByTestId('ad-slot')).toHaveCount(0);
     await expect(page.getByTestId('disqus-thread')).toBeVisible();
   }
 });
 
 test('poems never load blog-only integrations', async ({ page }) => {
   await page.goto('/poems/');
-  for (const hook of ['blog-post', 'blog-toc', 'newsletter', 'ad-slot', 'disqus-thread']) await expect(page.getByTestId(hook)).toHaveCount(0);
+  for (const hook of ['blog-post', 'blog-toc', 'newsletter', 'disqus-thread']) await expect(page.getByTestId(hook)).toHaveCount(0);
   const thirdParty = new Set<string>();
   page.on('request', (request) => { if (!request.url().startsWith('http://127.0.0.1:4321')) thirdParty.add(new URL(request.url()).hostname); });
   await page.reload();
@@ -258,7 +257,6 @@ test('credential-free integrations stay gated and Disqus loads automatically', a
   await page.goto('/blog/a-minha-primeira-vez/');
   await expect(page.locator('script[src*="googletagmanager.com"]')).toHaveCount(0);
   await expect(page.locator('script[src*="pagead2.googlesyndication.com"]')).toHaveCount(0);
-  await expect(page.getByTestId('ad-slot')).toHaveCount(0);
   await expect(page.getByTestId('newsletter')).toHaveCount(0);
   await expect(page.getByTestId('disqus-thread').getByRole('button')).toHaveCount(0);
   await expect(page.getByTestId('disqus-thread').locator('p')).toHaveCount(0);
