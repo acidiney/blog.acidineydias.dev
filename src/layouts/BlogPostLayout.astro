@@ -48,14 +48,14 @@ const image = blogImage(post.id, post.data.featuredimg, post.data.featuredimgWid
 .article__header { margin-bottom: 2.75rem; text-align: left; }
 .article__content { width: min(var(--article-content-width), 100%); }
 .article__header h1 { font-size: clamp(2.65rem, 5.8vw, 5.2rem); margin: 1rem 0 1.35rem; line-height: 1.02; text-wrap: balance; }
-.dek { max-width: 740px; margin: 0; color: var(--muted); font-size: clamp(1.08rem, 1.7vw, 1.32rem); line-height: 1.5; }
+.dek { max-width: 740px; margin: 0; color: var(--muted); font-size: clamp(1.25rem, 2vw, 1.55rem); line-height: 1.5; }
 .byline { margin-top: 1.2rem; color: var(--faint); font-size: .86rem; }
 .hero-image { margin-top: 0; margin-bottom: 3rem; }
 .hero-image img { width: 100%; max-height: 580px; object-fit: cover; border-radius: 0; }
 .article__grid { display: grid; grid-template-columns: minmax(0, var(--article-content-width)) var(--article-rail-width); justify-content: start; gap: var(--article-gap); }
 .article__grid aside { grid-column: 2; grid-row: 1; }
 .article__grid .prose { grid-column: 1; grid-row: 1; }
-.tags { max-width: var(--article-content-width); display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: 4.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+.tags { max-width: var(--article-content-width); display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: 1.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
 .tags a { color: var(--muted); padding: 0; text-decoration: none; font-size: .78rem; }
 .tags a:hover { color: var(--ink); }
 @media (max-width: 1271px) { .article__grid { grid-template-columns: minmax(0, var(--article-content-width)); }.article__grid aside { grid-column: 1; grid-row: 1; }.article__grid .prose { grid-column: 1; grid-row: 2; } }
