@@ -181,7 +181,7 @@ test('mobile article TOC keeps its compact active state and no-heading fallback'
   await expect(page.getByTestId('blog-toc').locator('[data-toc-list]')).toHaveCount(0);
 });
 
-test('credential-free blog integrations stay gated and Disqus is lazy', async ({ page }) => {
+test('credential-free integrations stay gated and Disqus loads automatically', async ({ page }) => {
   const disqusRequests: string[] = [];
   await page.route('https://acidineydias.disqus.com/**', async (route) => {
     disqusRequests.push(route.request().url());
@@ -192,8 +192,7 @@ test('credential-free blog integrations stay gated and Disqus is lazy', async ({
   await expect(page.locator('script[src*="pagead2.googlesyndication.com"]')).toHaveCount(0);
   await expect(page.getByTestId('ad-slot')).toHaveAttribute('data-configured', 'false');
   await expect(page.getByTestId('newsletter').locator('form')).toHaveCount(0);
-  expect(disqusRequests).toEqual([]);
-  await page.getByTestId('disqus-thread').getByRole('button', { name: 'Carregar comentários do Disqus' }).click();
+  await expect(page.getByTestId('disqus-thread').getByRole('button')).toHaveCount(0);
   await expect.poll(() => disqusRequests).toEqual(['https://acidineydias.disqus.com/embed.js']);
 });
 

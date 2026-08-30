@@ -1,6 +1,6 @@
 ---
 skill: task-breakdown
-version: 1
+version: 2
 date: 2026-08-30
 status: approved
 scope: locked
@@ -8,33 +8,32 @@ scope: locked
 
 # Shared context
 
-- Astro renders the Markdown heading list in `BlogToc.astro`.
-- The TOC tracks level-two and level-three headings only.
-- The approved palette uses `#212121` plus the existing muted and rule tokens.
-- The existing brand signature stays above the index.
-- Articles without headings keep the `Leitura contínua` state.
+- The approved article reading axis is 960px.
+- The local environment has no newsletter endpoint or AdSense credentials.
+- Disqus uses the existing `acidineydias` shortname fallback and legacy article metadata.
+- The closing section remains light, square, and free of cards or decorative backgrounds.
 - No new runtime dependency is allowed.
 
-## Task 1: Track the current desktop section
+## Task 1: Load the conversation automatically
 
 **Depends on:** None
 
-**Outcome:** The sticky desktop TOC exposes the reader's current `H2` or `H3` through a connected active line and matching text state.
+**Outcome:** Every blog article requests and mounts its Disqus conversation without asking the reader to click a control.
 
-**Why:** This delivers the requested reading-position effect and makes long articles easier to navigate.
+**Why:** This removes the gated interaction explicitly rejected by the user.
 
-**Acceptance:** In a desktop browser on an article containing both heading levels, scrolling across successive headings moves the sole `aria-current="location"` state to the matching TOC link and its connected segment uses the primary ink color.
+**Acceptance:** Opening an article issues one request to the configured Disqus embed URL without user interaction and renders no manual load button.
 
 **Autonomy:** AFK
 
-## Task 2: Preserve responsive and no-heading behavior
+## Task 2: Compact the article closing section
 
 **Depends on:** Task 1
 
-**Outcome:** The active state remains legible on narrow screens without the desktop spine, while articles without headings retain their current fallback.
+**Outcome:** The article ends with one restrained conversation block on the 960px reading axis, while unconfigured advertising and newsletter UI remain absent.
 
-**Why:** The effect must not damage mobile reading or short articles.
+**Why:** This removes the empty bands and competing headings visible in the supplied screenshot.
 
-**Acceptance:** Mobile end-to-end coverage confirms the active link uses the compact indicator without horizontal page overflow, and the no-heading article still displays `Leitura contínua`.
+**Acceptance:** In the default local build, the article has no visible ad placeholder or newsletter, and the conversation heading shares the article content left edge with no explanatory sentence.
 
 **Autonomy:** AFK

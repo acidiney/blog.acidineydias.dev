@@ -1,0 +1,30 @@
+---
+interface Props { legacyPath: string; legacyIdentifier?: string; title: string; }
+const { legacyPath, legacyIdentifier, title } = Astro.props;
+const shortname = import.meta.env.PUBLIC_DISQUS_SHORTNAME ?? 'acidineydias';
+const identifier = legacyIdentifier;
+const legacyUrl = new URL(legacyPath, 'https://blog.acidineydias.dev').href;
+---
+<section class="comments" data-testid="disqus-thread" data-legacy-url={legacyUrl} data-legacy-identifier={identifier ?? ''} aria-labelledby="comments-title">
+  <h2 id="comments-title">Conversa</h2>
+  <div id="disqus_thread"></div>
+  <noscript>Ative o JavaScript para ver os comentários.</noscript>
+</section>
+<script is:inline define:vars={{ shortname, identifier, legacyUrl, title }}>
+  window.disqus_config = function () {
+    this.page.url = legacyUrl;
+    if (identifier) this.page.identifier = identifier;
+    this.page.title = title;
+  };
+  const script = document.createElement('script');
+  script.src = `https://${shortname}.disqus.com/embed.js`;
+  script.dataset.timestamp = String(Date.now());
+  document.body.appendChild(script);
+</script>
+<style>
+.comments { max-width: var(--article-content-width, 960px); margin: 5rem auto; border-top: 1px solid var(--rule); padding-top: 2rem; }
+.comments h2 { font: 700 2.4rem/1.08 var(--font-reading); letter-spacing: -.025em; margin: 0; }
+.comments p { color: var(--muted); }
+.comments button { border: 1px solid var(--muted); color: var(--ink); background: transparent; border-radius: 0; padding: .7rem 1rem; cursor: pointer; font-weight: 700; }
+.comments button:hover { border-color: var(--ink); color: var(--ink); }
+</style>
