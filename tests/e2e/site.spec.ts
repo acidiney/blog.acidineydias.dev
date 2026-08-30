@@ -128,6 +128,25 @@ test('desktop article TOC tracks H2 and H3 reading progress', async ({ page }, t
   await expect(page.getByTestId('blog-toc').locator('[aria-current="location"]')).toHaveCount(1);
 });
 
+test('mobile article TOC keeps its compact active state and no-heading fallback', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile-chromium');
+  await page.goto('/blog/um-pouco-sobre-offline-first-e-granularidade/');
+  const heading = page.getByRole('heading', { name: 'Onde eu usei', exact: true });
+  const link = page.getByTestId('blog-toc').getByRole('link', { name: 'Onde eu usei', exact: true });
+  await heading.evaluate((element) => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, (element as HTMLElement).offsetTop - 120);
+  });
+  await expect(link).toHaveAttribute('aria-current', 'location');
+  await expect(link).toHaveCSS('text-decoration-line', 'underline');
+  const widths = await page.evaluate(() => ({ page: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
+  expect(widths.page).toBeLessThanOrEqual(widths.viewport);
+
+  await page.goto('/blog/a-minha-primeira-vez/');
+  await expect(page.getByTestId('blog-toc')).toContainText('Leitura contínua');
+  await expect(page.getByTestId('blog-toc').locator('[data-toc-list]')).toHaveCount(0);
+});
+
 test('credential-free blog integrations stay gated and Disqus is lazy', async ({ page }) => {
   const disqusRequests: string[] = [];
   await page.route('https://acidineydias.disqus.com/**', async (route) => {
