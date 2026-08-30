@@ -25,8 +25,8 @@ test('all eight posts are reachable from the editorial index', async ({ page }) 
     await page.goto(path);
     await expect(page.getByTestId('blog-post')).toBeVisible();
     await expect(page.getByTestId('blog-toc')).toBeVisible();
-    await expect(page.getByTestId('newsletter')).toBeVisible();
-    await expect(page.getByTestId('ad-slot')).toBeVisible();
+    await expect(page.getByTestId('newsletter')).toHaveCount(0);
+    await expect(page.getByTestId('ad-slot')).toHaveCount(0);
     await expect(page.getByTestId('disqus-thread')).toBeVisible();
   }
 });
@@ -117,6 +117,7 @@ test('desktop article TOC tracks H2 and H3 reading progress', async ({ page }, t
   test.skip(testInfo.project.name === 'mobile-chromium');
   await page.goto('/blog/um-pouco-sobre-offline-first-e-granularidade/');
   const heading = page.getByRole('heading', { name: 'Onde eu usei', exact: true });
+  await expect(page.getByRole('heading', { name: 'Proxy', exact: true })).toHaveCSS('font-family', /sohne/);
   const link = page.getByTestId('blog-toc').getByRole('link', { name: 'Onde eu usei', exact: true });
   await heading.evaluate((element) => {
     document.documentElement.style.scrollBehavior = 'auto';
@@ -190,10 +191,17 @@ test('credential-free integrations stay gated and Disqus loads automatically', a
   await page.goto('/blog/a-minha-primeira-vez/');
   await expect(page.locator('script[src*="googletagmanager.com"]')).toHaveCount(0);
   await expect(page.locator('script[src*="pagead2.googlesyndication.com"]')).toHaveCount(0);
-  await expect(page.getByTestId('ad-slot')).toHaveAttribute('data-configured', 'false');
-  await expect(page.getByTestId('newsletter').locator('form')).toHaveCount(0);
+  await expect(page.getByTestId('ad-slot')).toHaveCount(0);
+  await expect(page.getByTestId('newsletter')).toHaveCount(0);
   await expect(page.getByTestId('disqus-thread').getByRole('button')).toHaveCount(0);
+  await expect(page.getByTestId('disqus-thread').locator('p')).toHaveCount(0);
+  await expect(page.getByTestId('disqus-thread')).toHaveAttribute('aria-label', 'Comentários');
+  await expect(page.getByTestId('disqus-thread').locator('h2')).toHaveCount(0);
   await expect.poll(() => disqusRequests).toEqual(['https://acidineydias.disqus.com/embed.js']);
+  const closingEdges = await page.locator('.prose, .tags, [data-testid="disqus-thread"]').evaluateAll((elements) =>
+    elements.map((element) => Math.round(element.getBoundingClientRect().left)),
+  );
+  expect(new Set(closingEdges).size).toBe(1);
 });
 
 test('SEO, feeds and custom 404 are served from the built site', async ({ page, request }) => {

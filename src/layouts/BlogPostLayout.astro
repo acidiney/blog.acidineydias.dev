@@ -55,7 +55,7 @@ const image = blogImage(post.id, post.data.featuredimg, post.data.featuredimgWid
 .article__grid { display: grid; grid-template-columns: minmax(0, var(--article-content-width)) var(--article-rail-width); justify-content: start; gap: var(--article-gap); }
 .article__grid aside { grid-column: 2; grid-row: 1; }
 .article__grid .prose { grid-column: 1; grid-row: 1; }
-.tags { max-width: var(--article-content-width); display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: 4.5rem auto; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+.tags { max-width: var(--article-content-width); display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: 4.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
 .tags a { color: var(--muted); padding: 0; text-decoration: none; font-size: .78rem; }
 .tags a:hover { color: var(--ink); }
 @media (max-width: 1271px) { .article__grid { grid-template-columns: minmax(0, var(--article-content-width)); }.article__grid aside { grid-column: 1; grid-row: 1; }.article__grid .prose { grid-column: 1; grid-row: 2; } }

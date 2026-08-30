@@ -1,0 +1,13 @@
+---
+const client = import.meta.env.PUBLIC_ADSENSE_CLIENT;
+const slot = import.meta.env.PUBLIC_ADSENSE_SLOT;
+const configured = Boolean(client && slot);
+---
+{configured && <aside class="ad-slot" data-testid="ad-slot" aria-label="Publicidade" data-configured="true">
+  <ins class="adsbygoogle" style="display:block" data-ad-client={client} data-ad-slot={slot} data-ad-format="auto" data-full-width-responsive="true"></ins>
+</aside>}
+{configured && <script is:inline async crossorigin="anonymous" src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${client}`}></script>}
+{configured && <script is:inline>try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (_) {}</script>}
+<style>
+.ad-slot { min-height: 72px; margin: 3rem 0 0; border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+</style>

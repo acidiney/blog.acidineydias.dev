@@ -2,7 +2,7 @@
 skill: task-breakdown
 version: 2
 date: 2026-08-30
-status: approved
+status: complete
 scope: locked
 ---
 

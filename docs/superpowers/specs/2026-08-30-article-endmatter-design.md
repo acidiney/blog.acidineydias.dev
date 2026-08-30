@@ -12,7 +12,8 @@ Replace the loose blocks below each article with one compact closing section on 
 - When configured, keep advertisements and the newsletter inside the same 960px axis with restrained spacing.
 - Place the conversation section after the configured integrations.
 - Separate the conversation from preceding content with one hairline rule.
-- Use a compact 1.8rem reading-font heading and no explanatory copy.
+- Let the Disqus interface provide its own comment heading; do not repeat it in the page shell.
+- Use the approved Söhne/Helvetica display stack for every heading and Inter for body copy; do not introduce a third typeface.
 - Avoid cards, backgrounds, rounded containers, oversized type, and large empty bands.
 
 ## Disqus behavior

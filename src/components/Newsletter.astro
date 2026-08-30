@@ -1,0 +1,22 @@
+---
+const endpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT;
+---
+{endpoint && <section class="newsletter" data-testid="newsletter" aria-labelledby="newsletter-title">
+  <p class="eyebrow">Correspondência rara</p>
+  <h2 id="newsletter-title">Novos textos, sem ruído.</h2>
+  <p>Receba um aviso quando uma ideia nova encontrar forma.</p>
+  <form action={endpoint} method="post">
+    <label class="sr-only" for="newsletter-email">O seu email</label>
+    <input id="newsletter-email" name="EMAIL" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+    <button type="submit">Subscrever</button>
+  </form>
+</section>}
+<style>
+.newsletter { margin: 3rem 0 0; border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+.newsletter h2 { font: 700 clamp(1.6rem, 3vw, 1.8rem)/1.05 var(--font-display); letter-spacing: -.03em; margin: .45rem 0 .7rem; }
+.newsletter > p:not(.eyebrow) { color: var(--muted); margin: .4rem 0; }
+form { display: flex; gap: .65rem; max-width: 680px; margin-top: 1.2rem; }
+input { flex: 1; min-width: 0; background: transparent; border: 1px solid var(--muted); color: var(--ink); border-radius: 0; padding: .8rem; font: inherit; }
+button { background: var(--ink); color: var(--background); border: 1px solid var(--ink); border-radius: 0; padding: .8rem 1.1rem; font-weight: 750; }
+@media (max-width: 560px) { form { flex-direction: column; } }
+</style>
