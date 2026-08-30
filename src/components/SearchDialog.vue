@@ -11,6 +11,8 @@ type PagefindModule = { createInstance: (options: { language: 'pt' | 'en' }) => 
 const open = ref(false);
 const query = ref('');
 const loading = ref(false);
+const searched = ref(false);
+const errorMessage = ref('');
 const results = ref<Array<{ id: string; url: string; title: string; excerpt: string }>>([]);
 const dialog = ref<HTMLDialogElement>();
 let searchInstance: Promise<PagefindInstance> | undefined;
@@ -45,8 +47,15 @@ function close() {
 
 async function search() {
   const term = query.value.trim();
-  if (!term) { results.value = []; return; }
+  if (!term) {
+    results.value = [];
+    searched.value = false;
+    errorMessage.value = '';
+    return;
+  }
   loading.value = true;
+  searched.value = false;
+  errorMessage.value = '';
   try {
     const instance = await getSearchInstance();
     const response = await instance.search(term);
@@ -61,23 +70,37 @@ async function search() {
       .sort((a, b) => b.score - a.score || a.url.localeCompare(b.url))
       .filter((result, index, all) => all.findIndex((candidate) => candidate.url === result.url) === index)
       .slice(0, 8);
+    searched.value = true;
+  } catch {
+    results.value = [];
+    searched.value = true;
+    errorMessage.value = 'Não foi possível pesquisar. Tente novamente.';
   } finally { loading.value = false; }
 }
 </script>
 
 <template>
   <button class="search-button" type="button" data-testid="search-trigger" aria-label="Pesquisar no site" @click="show">Pesquisar <span aria-hidden="true">⌕</span></button>
-  <dialog ref="dialog" class="search-dialog" data-testid="search-dialog" @close="open = false">
+  <dialog ref="dialog" class="search-dialog" data-testid="search-dialog" aria-labelledby="search-dialog-title" @close="open = false">
+    <header class="search-dialog__header">
+      <h2 id="search-dialog-title">Pesquisar nos textos</h2>
+      <button class="close" type="button" aria-label="Fechar pesquisa" @click="close">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+      </button>
+    </header>
     <form class="search-bar" @submit.prevent="search">
       <label class="sr-only" for="site-search">Pesquisar artigos</label>
       <input id="site-search" v-model="query" type="search" placeholder="Procure uma ideia…" autocomplete="off">
-      <button type="submit">Pesquisar</button>
-      <button class="close" type="button" aria-label="Fechar pesquisa" @click="close">×</button>
+      <button class="submit" type="submit">
+        <span>Pesquisar</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg>
+      </button>
     </form>
-    <p v-if="loading" class="muted" role="status">A procurar…</p>
-    <div v-else data-testid="search-results" aria-live="polite">
-      <p v-if="query && !results.length" class="muted">Nenhum resultado.</p>
-      <ol v-else class="results">
+    <div class="search-content" data-testid="search-results" aria-live="polite">
+      <p v-if="loading" class="search-status" role="status">A procurar…</p>
+      <p v-else-if="errorMessage" class="search-status search-status--error">{{ errorMessage }}</p>
+      <p v-else-if="searched && !results.length" class="search-status">Nenhum texto encontrado.</p>
+      <ol v-else-if="results.length" class="results">
         <li v-for="result in results" :key="result.id">
           <a :href="result.url" @click="close">{{ result.title }}</a>
           <p v-html="result.excerpt" />
@@ -88,19 +111,44 @@ async function search() {
 </template>
 
 <style scoped>
-.search-dialog { width: min(720px, calc(100% - 2rem)); max-height: 78vh; margin: 10vh auto; border: 1px solid #67625a; border-radius: .8rem; background: #292929; color: #f8f4eb; padding: 1.2rem; }
-.search-dialog::backdrop { background: rgb(0 0 0 / .72); backdrop-filter: blur(5px); }
-.search-bar { display: grid; grid-template-columns: 1fr auto auto; gap: .6rem; }
-input { min-width: 0; border: 1px solid #5d5953; border-radius: .45rem; background: #181818; color: white; padding: .75rem; font: inherit; }
-button { border: 0; border-radius: .45rem; background: #f0b44d; color: #212121; padding: .7rem .9rem; font-weight: 800; cursor: pointer; }
-.close { background: transparent; color: #f8f4eb; font-size: 1.5rem; }
-.results { list-style: none; padding: 0; margin: 1.5rem 0 0; }
-.results li { border-top: 1px solid #4a4743; padding: 1rem 0; }
-.results a { color: #ffd178; font-family: Georgia, serif; font-size: 1.3rem; font-weight: 700; }
-.results p { color: #c4beb4; margin: .3rem 0 0; font-size: .95rem; }
-@media (max-width: 520px) {
-  .search-bar { grid-template-columns: minmax(0, 1fr) auto; }
-  .search-bar button[type="submit"] { grid-column: 1 / -1; grid-row: 2; }
-  .close { position: static; grid-column: 2; grid-row: 1; min-width: 44px; min-height: 44px; padding: .3rem .7rem; }
+.search-dialog {
+  width: min(560px, calc(100% - 2rem));
+  max-height: min(720px, calc(100dvh - 2rem));
+  margin: auto;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 0;
+  overflow: hidden;
+}
+.search-dialog::backdrop { background: rgb(33 33 33 / .36); }
+.search-dialog__header { min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .25rem .45rem .25rem 1rem; border-bottom: 1px solid var(--soft-rule); }
+.search-dialog__header h2 { margin: 0; font-family: var(--font-display); font-size: .76rem; font-weight: 700; letter-spacing: .01em; }
+.close { width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.close:hover { color: var(--ink); }
+.close svg { width: 18px; fill: none; stroke: currentColor; stroke-linecap: square; stroke-width: 1.75; }
+.search-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+input { min-width: 0; height: 64px; border: 0; background: transparent; color: var(--ink); padding: 0 1rem; font-family: "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 1.05rem; }
+input::placeholder { color: var(--muted); opacity: 1; }
+input:focus-visible { outline: 0; box-shadow: inset 0 -2px 0 var(--ink); }
+.submit { min-width: 132px; min-height: 64px; display: inline-flex; align-items: center; justify-content: center; gap: .55rem; border: 0; border-left: 1px solid var(--soft-rule); background: var(--ink); color: var(--inverse-ink); padding: 0 1.1rem; font-family: var(--font-display); font-size: .82rem; font-weight: 700; cursor: pointer; }
+.submit:hover { background: #343432; }
+.submit svg { width: 17px; fill: none; stroke: currentColor; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 1.7; }
+.search-content:not(:empty) { max-height: min(520px, calc(100dvh - 130px)); overflow-y: auto; border-top: 1px solid var(--soft-rule); }
+.search-status { margin: 0; padding: 1rem; color: var(--muted); font-family: "Inter", ui-sans-serif, system-ui, sans-serif; font-size: .9rem; }
+.search-status--error { color: var(--ink); }
+.results { list-style: none; padding: 0; margin: 0; }
+.results li { padding: 1rem; border-top: 1px solid var(--soft-rule); }
+.results li:first-child { border-top: 0; }
+.results a { color: var(--ink); font-family: var(--font-display); font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; text-decoration-thickness: 1px; }
+.results p { margin: .35rem 0 0; color: var(--muted); font-family: "Inter", ui-sans-serif, system-ui, sans-serif; font-size: .86rem; line-height: 1.55; }
+.results :deep(mark) { background: transparent; color: var(--ink); font-weight: 700; }
+@media (max-width: 420px) {
+  .search-dialog { width: calc(100% - 2rem); }
+  .search-bar { grid-template-columns: 1fr; }
+  input { height: 58px; }
+  .submit { min-height: 50px; border-top: 1px solid var(--soft-rule); border-left: 0; }
+  .search-content:not(:empty) { max-height: calc(100dvh - 174px); }
 }
 </style>

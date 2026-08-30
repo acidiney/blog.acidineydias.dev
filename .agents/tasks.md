@@ -1,6 +1,6 @@
 ---
 skill: task-breakdown
-version: 2
+version: 3
 date: 2026-08-30
 status: complete
 scope: locked
@@ -8,32 +8,44 @@ scope: locked
 
 # Shared context
 
-- The approved article reading axis is 960px.
-- The local environment has no newsletter endpoint or AdSense credentials.
-- Disqus uses the existing `acidineydias` shortname fallback and legacy article metadata.
-- The closing section remains light, square, and free of cards or decorative backgrounds.
+- The approved visual direction is a warm, light, minimal editorial interface.
+- The search remains a native dialog backed by the existing Pagefind integration.
+- The desktop dialog has a 560px maximum width and grows only when status or results content appears.
+- Existing typography and color tokens remain authoritative.
 - No new runtime dependency is allowed.
 
-## Task 1: Load the conversation automatically
+## Task 1: Compact the initial search surface
 
 **Depends on:** None
 
-**Outcome:** Every blog article requests and mounts its Disqus conversation without asking the reader to click a control.
+**Outcome:** Opening search shows a centered, restrained editorial dialog with a single compact control row.
 
-**Why:** This removes the gated interaction explicitly rejected by the user.
+**Why:** The current oversized panel, thick outlines, and large controls dominate the article.
 
-**Acceptance:** Opening an article issues one request to the configured Disqus embed URL without user interaction and renders no manual load button.
+**Acceptance:** At a desktop viewport, the unopened-results dialog is no wider than 560px and uses one thin outer rule with no heavy double outline.
 
 **Autonomy:** AFK
 
-## Task 2: Compact the article closing section
+## Task 2: Integrate search states into the compact dialog
 
 **Depends on:** Task 1
 
-**Outcome:** The article ends with one restrained conversation block on the 960px reading axis, while unconfigured advertising and newsletter UI remain absent.
+**Outcome:** Loading, empty, error, and result states extend the dialog below the search row without changing search behavior.
 
-**Why:** This removes the empty bands and competing headings visible in the supplied screenshot.
+**Why:** The dialog must stay compact initially while still making real search results easy to scan.
 
-**Acceptance:** In the default local build, the article has no visible ad placeholder or newsletter, and the conversation heading shares the article content left edge with no explanatory sentence.
+**Acceptance:** Submitting a query renders the existing Pagefind status or results beneath the controls and keeps keyboard focus styles visible.
+
+**Autonomy:** AFK
+
+## Task 3: Adapt and verify the dialog
+
+**Depends on:** Task 2
+
+**Outcome:** The same search interaction fits narrow screens and passes the project checks.
+
+**Why:** The compact desktop layout must not introduce clipped controls or horizontal overflow on mobile.
+
+**Acceptance:** At a 390px viewport, opening, submitting, and closing search produces no horizontal overflow and Escape still dismisses the dialog.
 
 **Autonomy:** AFK
