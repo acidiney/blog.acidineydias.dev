@@ -5,6 +5,7 @@
 [build.environment]
   NODE_VERSION = "24.20.0"
   PNPM_VERSION = "10.33.0"
+  PNPM_FLAGS = "--force"
 
 [[redirects]]
   from = "/blog/page/1/"
