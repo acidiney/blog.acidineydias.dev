@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EditorialPostGrid from '../components/EditorialPostGrid.astro';
+import { sortByDate } from '../lib/content';
+const posts = sortByDate(await getCollection('blog'));
+---
+<BaseLayout title="Acidiney Dias" description="Textos de Acidiney Dias sobre software, trabalho, dinheiro, Angola e vida." canonical="/">
+  <EditorialPostGrid posts={posts} title="Escrevo sobre software, trabalho e as coisas que tento perceber melhor." description="Textos recentes" />
+</BaseLayout>

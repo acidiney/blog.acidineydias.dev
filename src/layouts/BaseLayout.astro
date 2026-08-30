@@ -1,0 +1,64 @@
+---
+import SearchDialog from '../components/SearchDialog.vue';
+import type { BlogImageSource } from '../lib/content';
+import { SITE_COPYRIGHT } from '../lib/content';
+import '../styles/global.css';
+
+interface Props { title: string; description: string; canonical?: string; image?: string; type?: 'website' | 'article'; noindex?: boolean; language?: 'pt' | 'en'; preloadImage?: BlogImageSource; }
+const { title, description, canonical = Astro.url.pathname, image = '/assets/img/acidiney-brand.jpg', type = 'website', noindex = false, language = 'pt', preloadImage } = Astro.props;
+const canonicalUrl = new URL(canonical, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+const fullTitle = title === 'Acidiney Dias' ? title : `${title} · Acidiney Dias`;
+const gaId = import.meta.env.PUBLIC_GA_ID;
+---
+<!doctype html>
+<html lang={language}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content="Acidiney Dias" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="alternate" type="application/rss+xml" title="Artigos de Acidiney Dias" href="/blog/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Poemas de Acidiney Dias" href="/poems/rss.xml" />
+    <link rel="icon" type="image/jpeg" href="/assets/img/acidiney-brand.jpg" />
+    <link rel="apple-touch-icon" href="/assets/img/acidiney-brand.jpg" />
+    <meta name="theme-color" content="#f4f2ec" />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage.src} imagesrcset={preloadImage.srcset} imagesizes="(max-width: 1092px) calc(100vw - 2rem), 1060px" fetchpriority="high" />}
+    {gaId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>}
+    {gaId && <script is:inline define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date()); gtag('config', gaId);
+    </script>}
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Saltar para o conteúdo</a>
+    <header class="site-header" data-testid="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/" aria-label="blog.acidineydias.dev">
+          <img src="/assets/img/acidiney-brand.jpg" width="460" height="460" alt="" />
+          <span>blog.acidineydias.dev</span>
+        </a>
+        <nav class="nav" aria-label="Navegação principal">
+          <a href="/blog/">Artigos</a><a href="/poems/">Poemas</a><a href="/blog/tags/">Assuntos</a>
+        </nav>
+        <SearchDialog client:idle={{ timeout: 800 }} />
+      </div>
+    </header>
+    <main id="content"><slot /></main>
+    <footer class="footer"><div class="shell footer__inner"><span>Textos sobre software, trabalho, dinheiro e vida.</span><span>© {SITE_COPYRIGHT} Acidiney Dias · <a href="/blog/rss.xml">RSS</a></span></div></footer>
+  </body>
+</html>

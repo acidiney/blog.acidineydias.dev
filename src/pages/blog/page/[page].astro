@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { POSTS_PER_PAGE, sortByDate } from '../../../lib/content';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = sortByDate(await getCollection('blog'));
+  return paginate(posts, { pageSize: POSTS_PER_PAGE }).filter(({ params }) => params.page !== '1');
+}) satisfies GetStaticPaths;
+interface Props { page: Page<CollectionEntry<'blog'>>; }
+const { page } = Astro.props as Props;
+---
+<BaseLayout title={`Artigos, página ${page.currentPage}`} description={`Arquivo de artigos. Página ${page.currentPage}.`} canonical={`/blog/page/${page.currentPage}/`}>
+  <section class="archive shell">
+    <header><p class="eyebrow">Arquivo</p><h1 class="display">Artigos, página {page.currentPage}</h1></header>
+    <div>{page.data.map((post) => <PostCard post={post} />)}</div>
+    <nav class="pagination" aria-label="Paginação">
+      {page.url.prev && <a href={page.currentPage === 2 ? '/blog/' : page.url.prev}>← Mais recentes</a>}<span>Página {page.currentPage} de {page.lastPage}</span>{page.url.next && <a href={page.url.next}>Mais antigos →</a>}
+    </nav>
+  </section>
+</BaseLayout>
+<style>
+.archive { max-width: 900px; padding-top: clamp(4rem, 9vw, 7rem); }
+.archive h1 { font-size: clamp(3rem, 7vw, 6rem); margin: .6rem 0 4rem; }
+.pagination { display: flex; gap: 1rem; justify-content: space-between; margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 1rem; color: var(--muted); }
+.pagination a { color: var(--ink); font-weight: 750; }
+</style>

@@ -1,0 +1,119 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24.20.0"
+  PNPM_VERSION = "10.33.0"
+
+[[redirects]]
+  from = "/blog/page/1/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2026/08/29/a-minha-primeira-vez/"
+  to = "/blog/a-minha-primeira-vez/"
+  status = 301
+
+[[redirects]]
+  from = "/2025/12/28/i-will-never-be-25-years-old-again/"
+  to = "/blog/i-will-never-be-25-years-old-again/"
+  status = 301
+
+[[redirects]]
+  from = "/2020/05/17/lookup-nao-exite-mais/"
+  to = "/blog/lookup-nao-exite-mais/"
+  status = 301
+
+[[redirects]]
+  from = "/2025/12/28/nunca-mais-terei-25-anos-de-idade/"
+  to = "/blog/nunca-mais-terei-25-anos-de-idade/"
+  status = 301
+
+[[redirects]]
+  from = "/2020/06/27/pare-de-limitar-o-frontend/"
+  to = "/blog/pare-de-limitar-o-frontend/"
+  status = 301
+
+[[redirects]]
+  from = "/2020/05/15/refazendo-meu-portfolio-parte-1/"
+  to = "/blog/refazendo-meu-portfolio-parte-1/"
+  status = 301
+
+[[redirects]]
+  from = "/2025/09/18/reflexoes-inss-exodo-juvenil-futuro-risco/"
+  to = "/blog/reflexoes-inss-exodo-juvenil-futuro-risco/"
+  status = 301
+
+[[redirects]]
+  from = "/2020/09/26/um-pouco-sobre-offline-first-e-granularidade/"
+  to = "/blog/um-pouco-sobre-offline-first-e-granularidade/"
+  status = 301
+
+[[redirects]]
+  from = "/a-minha-primeira-vez/"
+  to = "/blog/a-minha-primeira-vez/"
+  status = 301
+
+[[redirects]]
+  from = "/i-will-never-be-25-years-old-again/"
+  to = "/blog/i-will-never-be-25-years-old-again/"
+  status = 301
+
+[[redirects]]
+  from = "/lookup-nao-exite-mais/"
+  to = "/blog/lookup-nao-exite-mais/"
+  status = 301
+
+[[redirects]]
+  from = "/nunca-mais-terei-25-anos-de-idade/"
+  to = "/blog/nunca-mais-terei-25-anos-de-idade/"
+  status = 301
+
+[[redirects]]
+  from = "/pare-de-limitar-o-frontend/"
+  to = "/blog/pare-de-limitar-o-frontend/"
+  status = 301
+
+[[redirects]]
+  from = "/refazendo-meu-portfolio-parte-1/"
+  to = "/blog/refazendo-meu-portfolio-parte-1/"
+  status = 301
+
+[[redirects]]
+  from = "/reflexoes-inss-exodo-juvenil-futuro-risco/"
+  to = "/blog/reflexoes-inss-exodo-juvenil-futuro-risco/"
+  status = 301
+
+[[redirects]]
+  from = "/um-pouco-sobre-offline-first-e-granularidade/"
+  to = "/blog/um-pouco-sobre-offline-first-e-granularidade/"
+  status = 301
+
+# UI/UX was the only historical tag containing a slash, so it cannot use the
+# single-segment rule below and has an explicit canonical destination.
+[[redirects]]
+  from = "/tag/UI/UX/"
+  to = "/blog/tags/ui-ux/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/:tag/"
+  to = "/blog/tags/:tag/"
+  status = 301
+
+[[redirects]]
+  from = "/rss.xml"
+  to = "/blog/rss.xml"
+  status = 301
+
+[[redirects]]
+  from = "/feed.atom"
+  to = "/blog/rss.xml"
+  status = 301
+
+[[redirects]]
+  from = "/feed.json"
+  to = "/blog/rss.xml"
+  status = 301

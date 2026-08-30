@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import BlogToc from '../components/BlogToc.astro';
+import Newsletter from '../components/Newsletter.astro';
+import AdSlot from '../components/AdSlot.astro';
+import DisqusThread from '../components/DisqusThread.astro';
+import { blogImage, blogPath, formatDate, readingTimeMinutes, tagPath } from '../lib/content';
+import type { MarkdownHeading } from 'astro';
+
+interface Props { post: CollectionEntry<'blog'>; headings: MarkdownHeading[]; }
+const { post, headings } = Astro.props;
+const image = blogImage(post.id, post.data.featuredimg, post.data.featuredimgWidth, post.data.featuredimgHeight);
+const readingMinutes = readingTimeMinutes(post.body ?? '');
+const byline = post.data.language === 'en'
+  ? `By ${post.data.author} · ${readingMinutes} min read`
+  : `Por ${post.data.author} · ${readingMinutes} min de leitura`;
+---
+<BaseLayout title={post.data.title} description={post.data.summary} canonical={blogPath(post)} image={post.data.featuredimg} type="article" language={post.data.language} preloadImage={image}>
+  <article class="article shell" data-testid="blog-post" data-pagefind-body>
+    <header class="article__header">
+      <div class="article__content">
+        <p class="eyebrow">{post.data.tags[0] ?? 'Artigo'} · <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time></p>
+        <h1 class="display" data-pagefind-meta="title">{post.data.title}</h1>
+        <p class="dek">{post.data.summary}</p>
+        <p class="byline">{byline}</p>
+      </div>
+    </header>
+    <figure class="hero-image"><img src={image.src} srcset={image.srcset} sizes="(max-width: 1272px) calc(100vw - 2rem), 1240px" width={image.width} height={image.height} alt="" fetchpriority="high" /></figure>
+    <div class="article__grid">
+      <aside><BlogToc headings={headings} /></aside>
+      <div class="prose"><slot /></div>
+    </div>
+    <footer class="article__footer">
+      <div class="article__content">
+        <div class="tags">{post.data.tags.map((tag) => <a href={tagPath(tag)}>#{tag}</a>)}</div>
+        <AdSlot />
+        <Newsletter />
+        <DisqusThread legacyPath={post.data.legacyPath} legacyIdentifier={post.data.legacyIdentifier} title={post.data.title} />
+      </div>
+    </footer>
+  </article>
+  <script>
+    import mediumZoom from 'medium-zoom';
+    const images = document.querySelectorAll('[data-testid="blog-post"] .prose img');
+    if (images.length) mediumZoom(images, { background: '#f4f2ecf2', margin: 24 });
+  </script>
+</BaseLayout>
+<style>
+.article { --article-content-width: 960px; --article-frame-width: 1240px; --article-rail-width: 220px; --article-gap: 60px; padding-top: clamp(3rem, 7vw, 6rem); }
+.article__header, .hero-image, .article__grid, .article__footer { width: min(var(--article-frame-width), 100%); margin-inline: auto; }
+.article__header { margin-bottom: 2.75rem; text-align: left; }
+.article__content { width: min(var(--article-content-width), 100%); }
+.article__header h1 { font-size: clamp(2.65rem, 5.8vw, 5.2rem); margin: 1rem 0 1.35rem; line-height: 1.02; text-wrap: balance; }
+.dek { max-width: var(--article-content-width); margin: 0; color: var(--muted); font-size: clamp(1.08rem, 1.7vw, 1.32rem); line-height: 1.5; }
+.byline { margin-top: 1.2rem; color: var(--faint); font-size: .86rem; }
+.hero-image { margin-top: 0; margin-bottom: 3rem; }
+.hero-image img { width: 100%; max-height: 580px; object-fit: cover; border-radius: 0; }
+.article__grid { display: grid; grid-template-columns: minmax(0, var(--article-content-width)) var(--article-rail-width); justify-content: start; gap: var(--article-gap); }
+.article__grid aside { grid-column: 2; grid-row: 1; }
+.article__grid .prose { grid-column: 1; grid-row: 1; }
+.tags { max-width: var(--article-content-width); display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: 1.5rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+.tags a { color: var(--muted); padding: 0; text-decoration: none; font-size: .78rem; }
+.tags a:hover { color: var(--ink); }
+@media (max-width: 1271px) { .article__grid { grid-template-columns: minmax(0, var(--article-content-width)); }.article__grid aside { grid-column: 1; grid-row: 1; }.article__grid .prose { grid-column: 1; grid-row: 2; } }
+</style>

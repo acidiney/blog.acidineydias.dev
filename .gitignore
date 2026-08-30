@@ -1,5 +1,9 @@
-node_modules
-.temp
-dist
-yarn.lock
+node_modules/
+dist/
+.astro/
+.cache/
+playwright-report/
+test-results/
+coverage/
+*.log
 .DS_Store

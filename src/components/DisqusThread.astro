@@ -1,0 +1,26 @@
+---
+interface Props { legacyPath: string; legacyIdentifier?: string; title: string; }
+const { legacyPath, legacyIdentifier, title } = Astro.props;
+const shortname = import.meta.env.PUBLIC_DISQUS_SHORTNAME ?? 'acidineydias';
+const identifier = legacyIdentifier;
+const legacyUrl = new URL(legacyPath, 'https://blog.acidineydias.dev').href;
+---
+<section class="comments" data-testid="disqus-thread" data-legacy-url={legacyUrl} data-legacy-identifier={identifier ?? ''} aria-label="Comentários">
+  <div id="disqus_thread"></div>
+  <noscript>Ative o JavaScript para ver os comentários.</noscript>
+</section>
+<script is:inline define:vars={{ shortname, identifier, legacyUrl, title }}>
+  window.disqus_config = function () {
+    this.page.url = legacyUrl;
+    if (identifier) this.page.identifier = identifier;
+    this.page.title = title;
+  };
+  const script = document.createElement('script');
+  script.src = `https://${shortname}.disqus.com/embed.js`;
+  script.dataset.timestamp = String(Date.now());
+  document.body.appendChild(script);
+</script>
+<style>
+.comments { width: 100%; padding-top: 1.5rem; }
+.comments noscript { color: var(--muted); font-size: .86rem; }
+</style>

@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { sortByDate, tagPath, tagSegment } from '../../../lib/content';
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({ params: { tag: tagSegment(tag) }, props: { tag, posts: sortByDate(posts.filter((post) => post.data.tags.includes(tag))) } }));
+}
+const { tag, posts } = Astro.props;
+---
+<BaseLayout title={`#${tag}`} description={`Artigos sobre ${tag}.`} canonical={tagPath(tag)}>
+  <section class="tag-page shell"><p class="eyebrow">Assunto</p><h1 class="display">#{tag}</h1><p>{posts.length} {posts.length === 1 ? 'artigo' : 'artigos'}</p><div>{posts.map((post) => <PostCard post={post} />)}</div></section>
+</BaseLayout>
+<style>.tag-page { max-width: 900px; padding-top: clamp(4rem, 10vw, 8rem); }.tag-page h1 { font-size: clamp(4rem, 10vw, 9rem); margin: .5rem 0; }.tag-page > p { color: var(--muted); margin-bottom: 4rem; }</style>

@@ -1,0 +1,8 @@
+---
+import { getCollection, render } from 'astro:content';
+import PoemLayout from '../../layouts/PoemLayout.astro';
+export async function getStaticPaths() { return (await getCollection('poems')).map((poem) => ({ params: { slug: poem.id }, props: { poem } })); }
+const { poem } = Astro.props;
+const { Content } = await render(poem);
+---
+<PoemLayout poem={poem}><Content /></PoemLayout>

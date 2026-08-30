@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { blogImage, blogPath, formatDate } from '../lib/content';
+interface Props { post: CollectionEntry<'blog'>; featured?: boolean; }
+const { post, featured = false } = Astro.props;
+const image = blogImage(post.id, post.data.featuredimg, post.data.featuredimgWidth, post.data.featuredimgHeight);
+---
+<article class:list={['post-card', { featured }]} data-testid="blog-card">
+  <a class="post-card__image" href={blogPath(post)} tabindex="-1"><img src={image.src} srcset={image.srcset} sizes={featured ? '(max-width: 720px) calc(100vw - 2rem), 58vw' : '(max-width: 720px) calc(100vw - 2rem), 35vw'} width={image.width} height={image.height} alt="" loading={featured ? 'eager' : 'lazy'} /></a>
+  <div class="post-card__body">
+    <p class="eyebrow"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time></p>
+    <h2><a href={blogPath(post)}>{post.data.title}</a></h2>
+    <p>{post.data.summary}</p>
+    <a class="read" href={blogPath(post)} aria-label={`Ler artigo: ${post.data.title}`}>Ler artigo <span aria-hidden="true">→</span></a>
+  </div>
+</article>
+
+<style>
+.post-card { display: grid; grid-template-columns: minmax(180px, .72fr) 1fr; gap: 1.5rem; border-top: 1px solid var(--rule); padding: 1.5rem 0 2rem; }
+.post-card__image { display: block; background: var(--surface-subtle); overflow: hidden; aspect-ratio: 4 / 3; }
+.post-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+.post-card:hover img { transform: scale(1.025); }
+.post-card h2 { font: 700 clamp(1.55rem, 3vw, 2.35rem)/1.02 var(--font-display); letter-spacing: -.025em; margin: .35rem 0 .7rem; }
+.post-card h2 a { text-decoration: none; }
+.post-card p:not(.eyebrow) { color: var(--muted); margin: 0 0 1rem; line-height: 1.5; }
+.read { color: var(--ink); font-weight: 750; text-decoration: none; }
+.featured { grid-column: 1 / -1; grid-template-columns: 1.25fr 1fr; padding-top: 0; border: 0; }
+.featured .post-card__image { aspect-ratio: 16 / 10; }
+.featured h2 { font-size: clamp(2.1rem, 5vw, 4.5rem); }
+@media (max-width: 720px) { .post-card, .featured { grid-template-columns: 1fr; } }
+</style>

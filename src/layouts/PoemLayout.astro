@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import { formatDate, poemPath } from '../lib/content';
+const { poem } = Astro.props as { poem: CollectionEntry<'poems'> };
+---
+<BaseLayout title={poem.data.title} description={poem.data.summary} canonical={poemPath(poem)} type="article" language={poem.data.language}>
+  <article class="poem" data-testid="poem-post" data-pagefind-body>
+    <header><p class="eyebrow"><time datetime={poem.data.date.toISOString()}>{formatDate(poem.data.date)}</time></p><h1 data-pagefind-meta="title">{poem.data.title}</h1></header>
+    <div class="poem__body"><slot /></div>
+  </article>
+</BaseLayout>
+<style>
+.poem { width: min(660px, calc(100% - 2rem)); margin: clamp(5rem, 14vw, 12rem) auto; }
+.poem header { margin-bottom: 4rem; }
+.poem h1 { color: var(--ink); font: 400 clamp(3.5rem, 10vw, 7.5rem)/.95 var(--font-display); letter-spacing: -.045em; margin: .5rem 0; }
+.poem__body { color: #2a2926; font: 400 clamp(1.25rem, 2.2vw, 1.55rem)/2 var(--font-display); white-space: pre-line; }
+</style>

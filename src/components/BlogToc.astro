@@ -1,0 +1,123 @@
+---
+import type { MarkdownHeading } from 'astro';
+const { headings } = Astro.props as { headings: MarkdownHeading[] };
+let hasLevelTwoParent = false;
+const items = headings
+  .filter((heading) => heading.depth === 2 || heading.depth === 3)
+  .map((heading) => {
+    const visualDepth = heading.depth === 3 && hasLevelTwoParent ? 3 : 2;
+    if (heading.depth === 2) hasLevelTwoParent = true;
+    return { ...heading, visualDepth };
+  });
+---
+<nav class="toc" data-testid="blog-toc" aria-label="Neste artigo">
+  <a class="toc-brand" href="/" aria-label="blog.acidineydias.dev">
+    <img src="/assets/img/acidiney-brand.jpg" width="460" height="460" alt="" />
+    <span>blog.acidineydias.dev</span>
+  </a>
+  <p>Neste artigo</p>
+  {items.length ? <ol data-toc-list>{items.map((heading) => <li class={`depth-${heading.visualDepth}`} data-toc-item><a data-toc-link href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol> : <span class="muted">Leitura contínua</span>}
+</nav>
+<script>
+const toc = document.querySelector<HTMLElement>('[data-testid="blog-toc"]');
+const list = toc?.querySelector<HTMLOListElement>('[data-toc-list]');
+const links = list ? Array.from(list.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')) : [];
+const entries = links.flatMap((link) => {
+  const id = decodeURIComponent(link.hash.slice(1));
+  const heading = document.getElementById(id);
+  const item = link.closest<HTMLElement>('[data-toc-item]');
+  return heading && item ? [{ heading, item, link }] : [];
+});
+
+if (toc && list && entries.length) {
+  let currentLink: HTMLAnchorElement | undefined;
+  let frame = 0;
+
+  const revealCurrent = (item: HTMLElement) => {
+    if (window.matchMedia('(max-width: 980px)').matches) {
+      const left = item.offsetLeft - list.clientWidth / 2 + item.clientWidth / 2;
+      list.scrollTo({ left, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      return;
+    }
+
+    const top = item.offsetTop - toc.clientHeight / 2 + item.clientHeight / 2;
+    toc.scrollTo({ top, behavior: 'auto' });
+  };
+
+  const update = () => {
+    frame = 0;
+    const threshold = Math.min(180, window.innerHeight * .24);
+    let activeIndex = 0;
+
+    entries.forEach((entry, index) => {
+      if (entry.heading.getBoundingClientRect().top <= threshold) activeIndex = index;
+    });
+
+    entries.forEach((entry, index) => {
+      const passed = index <= activeIndex;
+      entry.item.toggleAttribute('data-passed', passed);
+      entry.item.toggleAttribute('data-active', index === activeIndex);
+      if (index === activeIndex) entry.link.setAttribute('aria-current', 'location');
+      else entry.link.removeAttribute('aria-current');
+    });
+
+    const active = entries[activeIndex];
+    const next = entries[activeIndex + 1];
+    const activeScroll = window.scrollY + active.heading.getBoundingClientRect().top - threshold;
+    const nextScroll = next
+      ? window.scrollY + next.heading.getBoundingClientRect().top - threshold
+      : Math.max(activeScroll + 1, document.documentElement.scrollHeight - window.innerHeight);
+    const sectionProgress = Math.min(1, Math.max(0, (window.scrollY - activeScroll) / (nextScroll - activeScroll)));
+    const activeMarker = active.item.offsetTop + active.item.clientHeight / 2;
+    const nextMarker = next ? next.item.offsetTop + next.item.clientHeight / 2 : list.scrollHeight;
+    const progress = activeMarker + (nextMarker - activeMarker) * sectionProgress;
+    list.style.setProperty('--toc-progress', `${progress}px`);
+
+    if (currentLink !== active.link) {
+      currentLink = active.link;
+      revealCurrent(active.item);
+    }
+  };
+
+  const scheduleUpdate = () => {
+    if (frame) return;
+    frame = requestAnimationFrame(update);
+  };
+
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate);
+  window.addEventListener('hashchange', scheduleUpdate);
+  update();
+}
+</script>
+<style>
+.toc { position: sticky; top: 1.5rem; max-height: calc(100vh - 3rem); overflow: auto; font-size: .74rem; }
+.toc-brand { display: block; margin-bottom: 1.6rem; color: var(--ink); text-decoration: none; }
+.toc-brand img { display: block; width: 36px; height: 36px; margin-bottom: .5rem; border-radius: 7px; object-fit: cover; }
+.toc-brand span { font-size: .62rem; font-weight: 650; letter-spacing: -.015em; white-space: nowrap; }
+.toc > p { color: var(--ink); font-size: .72rem; font-weight: 700; margin: 0 0 .9rem; }
+.toc ol { --toc-progress: 0px; position: relative; list-style: none; margin: 0; padding: .1rem 0 .1rem 1.2rem; }
+.toc ol::before, .toc ol::after { content: ''; position: absolute; left: 0; top: 0; width: 1px; }
+.toc ol::before { bottom: 0; background: var(--rule); }
+.toc ol::after { height: var(--toc-progress); background: var(--ink); transition: height 180ms ease-out; }
+.toc li { position: relative; margin: .68rem 0; line-height: 1.35; }
+.toc .depth-3 { padding-left: .75rem; }
+.toc .depth-3::before { content: ''; position: absolute; left: -1.2rem; top: .68em; width: .9rem; border-top: 1px solid var(--rule); }
+.toc .depth-3[data-passed]::before { border-color: var(--ink); }
+.toc a { color: var(--muted); text-decoration: none; }
+.toc li[data-passed] a, .toc a[aria-current='location'] { color: var(--ink); }
+.toc a[aria-current='location'] { font-weight: 650; }
+.toc a:hover { color: var(--ink); }
+@media (max-width: 980px) {
+  .toc { position: static; max-height: none; margin-bottom: 2.5rem; overflow: visible; border-left: 0; border-block: 1px solid var(--rule); padding: .85rem 0; }
+  .toc-brand { display: inline-flex; align-items: center; gap: .65rem; margin-bottom: 1rem; }
+  .toc-brand img { width: 32px; height: 32px; margin-bottom: 0; }
+  .toc > p { margin: 0 0 .65rem; }
+  .toc ol { display: flex; gap: 1rem; margin: 0; overflow-x: auto; padding: 0 0 .35rem; scrollbar-width: thin; }
+  .toc ol::before, .toc ol::after, .toc .depth-3::before { display: none; }
+  .toc li, .toc .depth-3 { flex: none; margin: 0; padding-left: 0; white-space: nowrap; }
+  .toc li[data-passed] a { color: var(--muted); }
+  .toc a[aria-current='location'] { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .45rem; }
+}
+@media (prefers-reduced-motion: reduce) { .toc ol::after { transition: none; } }
+</style>
