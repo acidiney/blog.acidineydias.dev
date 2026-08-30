@@ -8,5 +8,8 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   integrations: [vue(), sitemap()],
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    ssr: { noExternal: ['cookie'] },
+  },
 });
