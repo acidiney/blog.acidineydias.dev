@@ -15,8 +15,6 @@ featuredimgHeight: 941
 legacyPath: /2026/08/29/a-minha-primeira-vez/
 ---
 
-A minha primeira vez
-
 Hey
 
 Se me permitem, hoje gostaria de contar uma história pessoal sobre a minha experiência com o mercado de capitais em Angola.
